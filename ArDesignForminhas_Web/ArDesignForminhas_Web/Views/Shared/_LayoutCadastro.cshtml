@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Administração -  @ViewBag.Title - Ar Desing Forminhas</title>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/fontawesome")
+    @Scripts.Render("~/bundles/DataTable")
+    @Scripts.Render("~/bundles/sweetalert")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+    @RenderSection("scripts", required: false)
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e7f0f8 !important">
+        <div class="container">
+            <a href='@Url.Action("Index", "Home")' class = "navbar-brand">
+                <img src="~/Content/Imagens/Logo_SemFundo.png" width="70" height="40" />
+                Ar Desing Forminhas
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="p-2">@Html.ActionLink("Imagem Home", "Index", "ImagemHome", new { @class= "link" })</li>
+                    <li class="p-2">@Html.ActionLink("Categoria", "Index", "Categoria", new { @class = "link" })</li>
+                    <li class="p-2">@Html.ActionLink("Produto", "Index", "Produto", new { @class = "link" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        <br />
+        @RenderBody()
+    </div>
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Ar Desing Forminhas</p>
+    </footer>
+</body>
+</html>

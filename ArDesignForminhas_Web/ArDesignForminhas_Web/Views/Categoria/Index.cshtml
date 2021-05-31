@@ -1,0 +1,110 @@
+﻿@model IEnumerable<ArDesignForminhas_Web.Models.Categoria>
+@{
+    Layout = "~/Views/Shared/_LayoutCadastro.cshtml";
+    ViewBag.Title = "Cadastro de Categorias";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h2>Categorias</h2>
+    </div>
+    <div class="col-md-3 d-flex justify-content-end">
+        @Html.ActionLink(" Cadastrar", "Cadastrar", "Categoria", new {@class = "btn btn-outline-primary fas fa-plus-square"})
+    </div>
+</div>
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <table id="gridCategoria" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Codigo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CodigoPai)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descricao)
+                    </th>
+                    <th>
+                        &nbsp;
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.Codigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.CodigoPai)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.Descricao)
+                        </td>
+                        <td class="d-flex justify-content-end">
+                            <div class="button-group">
+                                 @Html.ActionLink(" ", "Editar", "Categoria", new { id = item.Codigo }, new { @class = "fas fa-edit" })
+                                 <button type="button" CommandArgument="@item.Codigo" class="btn btn-link" >
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+             </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#gridCategoria').DataTable({
+            language: {
+                url: "../Scripts/plugin/dataTables.Portuguese-Brasil.json"
+            }
+        });
+
+        $('.btn').click(function (e) {
+            var url = "@Url.Action("Delete", "Categoria")";
+            var valor = $(this).attr("CommandArgument");
+
+            url += "/" + valor
+
+            swal({
+                title: "Realmente deseja excluir a categoria?",
+                text: "Não será possível desfazer esta alteração!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Sim",
+                cancelButtonText: "Não",
+                closeOnConfirm: false,
+                closeOnCancel: true,
+                showLoaderOnConfirm: true
+            },
+                function () {
+                    $.post(url, function (data) {
+                        var response = JSON.parse(data);
+                        if (response.Status == 200)
+                            swal("", "Categoria deletada com sucesso.", "success");
+                        else
+                            swal("Ocorreu um erro ao excluir o registro.", "O erro foi: " + response.Mensagem, "error");
+                    });
+                });
+        });
+    });
+
+</script>
