@@ -12,6 +12,7 @@
     @Scripts.Render("~/bundles/fontawesome")
     @Scripts.Render("~/bundles/DataTable")
     @Scripts.Render("~/bundles/sweetalert")
+    @Scripts.Render("~/bundles/jqueryMask")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/css")
     @RenderSection("scripts", required: false)
@@ -29,9 +30,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="p-2">@Html.ActionLink("Imagem Home", "Index", "ImagemHome", new { @class= "link" })</li>
-                    <li class="p-2">@Html.ActionLink("Categoria", "Index", "Categoria", new { @class = "link" })</li>
-                    <li class="p-2">@Html.ActionLink("Produto", "Index", "Produto", new { @class = "link" })</li>
+                    <li class="p-2">@Html.ActionLink("Imagem Home", "Index", "ImagemHome", null, new { @class= "link" })</li>
+                    <li class="p-2">@Html.ActionLink("Categoria", "Index", "Categoria", null, new { @class = "link" })</li>
+                    <li class="p-2">@Html.ActionLink("Produto", "Index", "Produto",null, new { @class = "link" })</li>
                 </ul>
             </div>
         </div>

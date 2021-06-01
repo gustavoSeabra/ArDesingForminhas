@@ -147,12 +147,15 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infraestrutura\Contexto.cs" />
     <Compile Include="Infraestrutura\Repositorio\CategoriaRepositorio.cs" />
+    <Compile Include="Infraestrutura\Repositorio\ProdutoRepositorio.cs" />
     <Compile Include="Interfaces\ICategoriaRepositorio.cs" />
+    <Compile Include="Interfaces\IProdutoRepositorio.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Imagem.cs" />
     <Compile Include="Models\Produto.cs" />
@@ -208,6 +211,7 @@
     <Content Include="Scripts\jquery-3.5.1.min.js" />
     <Content Include="Scripts\jquery-3.5.1.slim.js" />
     <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
+    <Content Include="Scripts\jquery.mask.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -315,6 +319,8 @@
     <Content Include="Scripts\plugin\dataTables.Portuguese-Brasil.json" />
     <Content Include="Views\Categoria\Cadastrar.cshtml" />
     <Content Include="Views\Categoria\Editar.cshtml" />
+    <Content Include="Views\Produto\Index.cshtml" />
+    <Content Include="Views\Produto\Cadastrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

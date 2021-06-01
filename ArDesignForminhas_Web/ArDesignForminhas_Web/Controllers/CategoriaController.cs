@@ -22,13 +22,7 @@ namespace ArDesignForminhas_Web.Controllers
             return View(repositorio.Listar(string.Empty));
         }
 
-        // GET: Categoria/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Categoria/Create
+       // GET: Categoria/Create
         public ActionResult Cadastrar()
         {
             PreencheViewBagCategoriaPai();

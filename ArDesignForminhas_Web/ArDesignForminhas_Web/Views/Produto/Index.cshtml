@@ -1,15 +1,17 @@
-﻿@model IEnumerable<ArDesignForminhas_Web.Models.Categoria>
+﻿@model IEnumerable<ArDesignForminhas_Web.Models.Produto>
+
 @{
     Layout = "~/Views/Shared/_LayoutCadastro.cshtml";
-    ViewBag.Title = "Cadastro de Categorias";
+    ViewBag.Title = "Cadastro de Produtos";
 }
+
 
 <div class="row">
     <div class="col-md-9">
-        <h2>Categorias</h2>
+        <h2>Produtos</h2>
     </div>
     <div class="col-md-3 d-flex justify-content-end">
-        @Html.ActionLink(" Cadastrar", "Cadastrar", "Categoria", new {@class = "btn btn-outline-primary fas fa-plus-square"})
+        @Html.ActionLink(" Cadastrar", "Cadastrar", "Produto", new { @class = "btn btn-outline-primary fas fa-plus-square" })
     </div>
 </div>
 <br />
@@ -17,20 +19,20 @@
 
 <div class="row">
     <div class="col-md-12">
-        <table id="gridCategoria" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
+        <table id="gridProduto" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.Codigo)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.CodigoPai)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Nome)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Descricao)
+                        @Html.DisplayNameFor(model => model.Valor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CaminhoFoto)
                     </th>
                     <th>
                         &nbsp;
@@ -45,25 +47,25 @@
                             @Html.DisplayFor(modelitem => item.Codigo)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelitem => item.CodigoPai)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelitem => item.Nome)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelitem => item.Descricao)
+                            @Html.DisplayFor(modelitem => item.Valor)
+                        </td>
+                        <td>
+                            <img src="@item.CaminhoFoto" width="50" height="20" />
                         </td>
                         <td class="d-flex justify-content-end">
                             <div class="button-group">
-                                 @Html.ActionLink(" ", "Editar", "Categoria", new { id = item.Codigo }, new { @class = "fas fa-edit" })
-                                 <button type="button" CommandArgument="@item.Codigo" class="btn btn-link" >
+                                @Html.ActionLink(" ", "Editar", "Produto", new { id = item.Codigo }, new { @class = "fas fa-edit" })
+                                <button type="button" CommandArgument="@item.Codigo" class="btn btn-link">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </div>
                         </td>
                     </tr>
                 }
-             </tbody>
+            </tbody>
         </table>
     </div>
 </div>
@@ -71,7 +73,7 @@
 
 <script>
     $(document).ready(function () {
-        $('#gridCategoria').DataTable({
+        $('#gridProduto').DataTable({
             language: {
                 url: "../Scripts/plugin/dataTables.Portuguese-Brasil.json"
             }
@@ -79,14 +81,13 @@
 
         $('.btn').click(function (e) {
             if ($(this)[0].innerText != " Cadastrar") {
-
-                var url = "@Url.Action("Delete", "Categoria")";
+                var url = "@Url.Action("Delete", "Produto")";
                 var valor = $(this).attr("CommandArgument");
 
                 url += "/" + valor
 
                 swal({
-                    title: "Realmente deseja excluir a categoria?",
+                    title: "Realmente deseja excluir o produto?",
                     text: "Não será possível desfazer esta alteração!",
                     type: "warning",
                     showCancelButton: true,
@@ -101,11 +102,10 @@
                         $.post(url, function (data) {
                             var response = JSON.parse(data);
                             if (response.Status == 200)
-                                swal("", "Categoria deletada com sucesso.", "success");
+                                swal("", "Produto excluido com sucesso.", "success");
                             else
-                                swal("Ocorreu um erro ao excluir o registro.", "O erro foi: " + response.Mensagem, "error");
+                                swal("Ocorreu um erro ao excluir o produto.", "O erro foi: " + response.Mensagem, "error");
                         });
-
                     });
             }
         });

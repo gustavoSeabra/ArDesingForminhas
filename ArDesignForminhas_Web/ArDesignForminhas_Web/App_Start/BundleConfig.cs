@@ -23,6 +23,9 @@ namespace ArDesignForminhas_Web
             bundles.Add(new ScriptBundle("~/bundles/sweetalert").Include(
                 "~/Scripts/sweetalert.min.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jqueryMask").Include(
+                        "~/Scripts/jquery.mask.min.js"));
+
             // Use a versão em desenvolvimento do Modernizr para desenvolver e aprender. Em seguida, quando estiver
             // pronto para a produção, utilize a ferramenta de build em https://modernizr.com para escolher somente os testes que precisa.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
