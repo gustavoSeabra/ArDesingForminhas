@@ -20,9 +20,12 @@ namespace ArDesignForminhas_Web.Controllers
         }
 
         // GET: Produto
-        public ActionResult Index()
+        public ActionResult Index() => View();
+        
+        [HttpGet]
+        public ActionResult Listar()
         {
-            return View(repositorio.Listar());
+            return PartialView("_Listar", repositorio.Listar());
         }
 
         // GET: Produto/Details/5

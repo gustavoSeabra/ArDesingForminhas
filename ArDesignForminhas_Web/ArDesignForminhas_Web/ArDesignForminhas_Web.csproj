@@ -209,6 +209,8 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Cadastro\Categoria\Listar.js" />
+    <Content Include="Scripts\Cadastro\Produto\Listar.js" />
     <Content Include="Scripts\DataTable.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
@@ -401,6 +403,8 @@
     <Content Include="Views\Categoria\Editar.cshtml" />
     <Content Include="Views\Produto\Index.cshtml" />
     <Content Include="Views\Produto\Cadastrar.cshtml" />
+    <Content Include="Views\Categoria\_Listar.cshtml" />
+    <Content Include="Views\Produto\_Listar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -15,18 +15,20 @@ namespace ArDesignForminhas_Web.Controllers
         {
             repositorio = _repositorio;
         }
-        
+
         // GET: Categoria
-        public ActionResult Index()
+        public ActionResult Index() => View();
+        
+
+        [HttpGet]
+        public ActionResult Listar()
         {
-            return View(repositorio.Listar(string.Empty));
+            return PartialView("_Listar", repositorio.Listar(string.Empty));
         }
 
        // GET: Categoria/Create
         public ActionResult Cadastrar()
         {
-            PreencheViewBagCategoriaPai();
-
             return View();
         }
 
@@ -49,8 +51,6 @@ namespace ArDesignForminhas_Web.Controllers
         // GET: Categoria/Edit/5
         public ActionResult Editar(int id)
         {
-            PreencheViewBagCategoriaPai();
-
             return View(repositorio.ObeterPorCodigo(id));
         }
 
@@ -63,12 +63,6 @@ namespace ArDesignForminhas_Web.Controllers
                 var objCategoria = new Categoria();
 
                 objCategoria.Codigo = id;
-                
-                if (string.IsNullOrEmpty(collection["CodigoPai"]))
-                    objCategoria.CodigoPai = null;
-                else
-                    objCategoria.CodigoPai = Convert.ToInt32(collection["CodigoPai"]);
-
                 objCategoria.Nome = collection["Nome"];
                 objCategoria.Descricao = collection["Descricao"];
                 
@@ -104,16 +98,6 @@ namespace ArDesignForminhas_Web.Controllers
             }
 
             return serializer.Serialize(objResposta);
-        }
-
-        private void PreencheViewBagCategoriaPai()
-        {
-            var lista = repositorio.ListarCategoriaPai();
-
-            ViewBag.CategoriaPai = new SelectList(
-                lista,
-                "CodigoPai",
-                "Nome");
         }
     }
 }

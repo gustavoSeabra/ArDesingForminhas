@@ -15,28 +15,25 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
                                                             Nome,
                                                             Descricao,
                                                             Valor,
-                                                            CodCategoria,
-                                                            CaminhoFoto
+                                                            CodCategoria
                                                     from produto";
 
         private const string SQL_SELECIONAR_PRODUTO = @"select  Codigo,
                                                                 Nome,
                                                                 Descricao,
                                                                 Valor,
-                                                                CodCategoria,
-                                                                CaminhoFoto
+                                                                CodCategoria
                                                         from produto
                                                         where Codigo = @Codigo";
 
-        private const string SQL_ADICIONAR_PRODUTO = @"insert into produto(Nome, Descricao, Valor, CodCategoria, CaminhoFoto)
-                                                        values (@Nome, @Descricao, @Valor, @CodCategoria, @CaminhoFoto)";
+        private const string SQL_ADICIONAR_PRODUTO = @"insert into produto(Nome, Descricao, Valor, CodCategoria)
+                                                        values (@Nome, @Descricao, @Valor, @CodCategoria)";
 
         private const string SQL_EDITAR_PRODUTO = @"update produto set
 	                                                    Nome = @Nome,
                                                         Descricao = @Descricao,
                                                         Valor = @Valor,
-                                                        CodCategoria = @CodCategoria,
-                                                        CaminhoFoto = @CaminhoFoto,
+                                                        CodCategoria = @CodCategoria
                                                     where Codigo = @Codigo";
 
         private const string SQL_EXCLUIR_PRODUTO = @"delete from produto where Codigo = @Codigo";
@@ -52,7 +49,6 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
             parametros.Add("Descricao", objProduto.Descricao, System.Data.DbType.String, null, 500);
             parametros.Add("Valor", objProduto.Valor, System.Data.DbType.Decimal);
             parametros.Add("CodCategoria", objProduto.CodCategoria, System.Data.DbType.Int32);
-            parametros.Add("CaminhoFoto", objProduto.CaminhoFoto, System.Data.DbType.String, null, 500);
 
             Contexto.Executar(SQL_ADICIONAR_PRODUTO, parametros);
         }
@@ -66,7 +62,6 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
             parametros.Add("Descricao", objProduto.Descricao, System.Data.DbType.String, null, 500);
             parametros.Add("Valor", objProduto.Valor, System.Data.DbType.Decimal);
             parametros.Add("CodCategoria", objProduto.CodCategoria, System.Data.DbType.Int32);
-            parametros.Add("CaminhoFoto", objProduto.CaminhoFoto, System.Data.DbType.String, null, 500);
 
             return Contexto.Executar(SQL_EDITAR_PRODUTO, parametros);
         }

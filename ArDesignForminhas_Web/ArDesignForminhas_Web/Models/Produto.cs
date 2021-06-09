@@ -10,6 +10,5 @@ namespace ArDesignForminhas_Web.Models
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
         public int CodCategoria { get; set; }
-        public string CaminhoFoto { get; set; }
     }
 }

@@ -22,18 +22,6 @@
     <br />
     <div class="row">
         <div class="form-group col-md-12">
-            <label class="font-weight-bold">Categoria Pai: </label>
-            @Html.DropDownListFor(model => model.CodigoPai, ((IEnumerable<SelectListItem>)ViewBag.CategoriaPai)
-                 .Select(option => new SelectListItem
-                 {
-                     Text = option.Text,
-                     Value = option.Value,
-                     Selected = (Model != null) && (Model.Codigo == Convert.ToInt32(option.Value))
-                 }), "- Selecione -", new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-12">
             <label class="font-weight-bold">Nome: </label>
             @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
         </div>
