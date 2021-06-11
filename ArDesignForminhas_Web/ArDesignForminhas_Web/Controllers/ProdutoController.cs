@@ -3,6 +3,7 @@ using ArDesignForminhas_Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,6 +13,7 @@ namespace ArDesignForminhas_Web.Controllers
     {
         private ICategoriaRepositorio categoriaRepositorio;
         private IProdutoRepositorio repositorio;
+        private const string CaminhoFotoProduto = "~/Content/Imagens/Produto/";
 
         public ProdutoController(IProdutoRepositorio _repositorio, ICategoriaRepositorio _repositorioCategoria)
         {
@@ -47,7 +49,35 @@ namespace ArDesignForminhas_Web.Controllers
         {
             try
             {
-                repositorio.Adicionar(objProduto);
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    var caminhoArquivo = Server.MapPath(CaminhoFotoProduto);
+                    var proximoID = repositorio.ObterProximoID();
+                    var contador = 1;
+                    var listaImagem = new List<ImagemProduto>();
+
+                    foreach (HttpPostedFileBase objFoto in Request.Files)
+                    {
+                        var nomeArquivo = $"{proximoID}_FOTO_{contador}";
+
+                        listaImagem.Add(new ImagemProduto()
+                        {
+                            Caminho = CaminhoFotoProduto + nomeArquivo,
+                            IdProduto = proximoID,
+                            Nome = nomeArquivo
+                        });
+
+                        objFoto.SaveAs(caminhoArquivo + nomeArquivo);
+                        contador++;
+                    }
+
+                    objProduto.Imagens = listaImagem;
+
+                    repositorio.Adicionar(objProduto);
+                    
+                    scope.Complete();
+                }
+
 
                 return RedirectToAction("Index");
             }

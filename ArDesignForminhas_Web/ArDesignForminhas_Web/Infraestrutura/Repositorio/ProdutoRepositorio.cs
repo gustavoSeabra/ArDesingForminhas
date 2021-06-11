@@ -38,6 +38,11 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
 
         private const string SQL_EXCLUIR_PRODUTO = @"delete from produto where Codigo = @Codigo";
 
+        private const string SQL_PROXIMO_ID = @"select case count(codigo) when 0
+	                                                    then 1
+                                                        else max(codigo) + 1
+                                                        end as 'ProximoID' 
+                                                from produto";
 
         #endregion
 
@@ -99,6 +104,11 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
 
             parametros.Add("Codigo", codProduto, System.Data.DbType.Int32);
             return Contexto.Obter<Produto>(SQL_SELECIONAR_PRODUTO, parametros);
+        }
+
+        public int ObterProximoID()
+        {
+            return Contexto.Obter<int>(SQL_PROXIMO_ID, null);
         }
     }
 }

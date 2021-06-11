@@ -12,5 +12,6 @@ namespace ArDesignForminhas_Web.Interfaces
         void Adicionar(Produto objProduto);
         int Editar(Produto objProduto);
         void Excluir(int codProduto);
+        int ObterProximoID();
     }
 }

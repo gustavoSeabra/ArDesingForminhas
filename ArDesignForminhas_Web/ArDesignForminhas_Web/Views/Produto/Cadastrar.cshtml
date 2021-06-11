@@ -4,7 +4,7 @@
 }
 
 
-@using (Html.BeginForm("Cadastrar", "Produto", FormMethod.Post))
+@using (Html.BeginForm("Cadastrar", "Produto", FormMethod.Post, new { enctype = "multipart/form-data"}))
 {
     <div class="row">
         <div class="col-md-9">
@@ -52,21 +52,12 @@
     </div>
     <div class="row">
         <div class="form-group col-md-12">
-            <label class="font-weight-bold">Foto: </label>
-            <input type="file" class="form-control-file" id="fileCaminhoFoto[]" data-show-upload="true" data-show-caption="true" multiple>
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-12">
             <div class="file-loading">
                 <label>Foto: </label>
-                <input id="file-3" type="file" multiple>
+                <input id="input-b6" name="input-b6[]" type="file" multiple accept="image/*">
             </div>
         </div>
     </div>
-
-
 }
 
 <script>
@@ -74,27 +65,13 @@
         // Máscara do campo valor
         $('#txtValor').mask('000.000.000.000.000,00', { reverse: true });
 
-        // File upload
-        $("#file-3").fileinput({
+        $("#input-b6").fileinput({
             theme: 'fas',
-            language:'pt-BR',
-            showUpload: true,
-            showCaption: true,
-            browseClass: "btn btn-primary",
-            fileType: "any",
-            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-            overwriteInitial: false,
-            initialPreviewAsData: true,
-            initialPreview: [
-                "http://lorempixel.com/1920/1080/transport/1",
-                "http://lorempixel.com/1920/1080/transport/2",
-                "http://lorempixel.com/1920/1080/transport/3"
-            ],
-            initialPreviewConfig: [
-                { caption: "transport-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1 },
-                { caption: "transport-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2 },
-                { caption: "transport-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3 }
-            ]
+            language: 'pt-BR',
+            showUpload: false,
+            dropZoneEnabled: false,
+            maxFileCount: 10,
+            mainClass: "input-group-lg"
         });
     });
 </script>
