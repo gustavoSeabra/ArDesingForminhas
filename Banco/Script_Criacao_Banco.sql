@@ -35,7 +35,7 @@ CREATE TABLE `imagem` (
 /******************************************************/
 
 CREATE TABLE `imagemproduto` (
-  `idimagem` int(11) NOT NULL,
+  `idimagem` int(11) NOT NULL AUTO_INCREMENT,
   `idProduto` int(11) NOT NULL,
   `nome` varchar(50) DEFAULT NULL,
   `caminho` varchar(1000) DEFAULT NULL,

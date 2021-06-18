@@ -11,12 +11,17 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
     {
         #region Querys´s
 
-        private const string SQL_LISTAR_PRODUTO = @"select  Codigo,
-                                                            Nome,
-                                                            Descricao,
-                                                            Valor,
-                                                            CodCategoria
-                                                    from produto";
+        private const string SQL_LISTAR_PRODUTO = @"SELECT	p.Codigo,
+		                                                    p.CodCategoria,
+		                                                    p.Nome,
+                                                            p.Valor,
+                                                            p.Descricao,
+                                                            i.idProduto,
+                                                            i.idProduto,
+                                                            i.nome,
+                                                            i.caminho
+                                                    FROM produto p left join imagemproduto i
+		                                                    on p.Codigo = i.idProduto";
 
         private const string SQL_SELECIONAR_PRODUTO = @"select  Codigo,
                                                                 Nome,
@@ -27,7 +32,8 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
                                                         where Codigo = @Codigo";
 
         private const string SQL_ADICIONAR_PRODUTO = @"insert into produto(Nome, Descricao, Valor, CodCategoria)
-                                                        values (@Nome, @Descricao, @Valor, @CodCategoria)";
+                                                        values (@Nome, @Descricao, @Valor, @CodCategoria);
+                                                        SELECT LAST_INSERT_ID();";
 
         private const string SQL_EDITAR_PRODUTO = @"update produto set
 	                                                    Nome = @Nome,
@@ -44,9 +50,20 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
                                                         end as 'ProximoID' 
                                                 from produto";
 
+
+
+        private const string SQL_INSERT_PRODUTO_IMAGEM = @"INSERT INTO imagemproduto
+                                                            (`idProduto`,
+                                                            `nome`,
+                                                            `caminho`)
+                                                            VALUES
+                                                            (@idProduto,
+                                                             @nome,
+                                                             @caminho)";
+
         #endregion
 
-        public void Adicionar(Produto objProduto)
+        public int Adicionar(Produto objProduto)
         {
             var parametros = new DynamicParameters();
 
@@ -55,7 +72,21 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
             parametros.Add("Valor", objProduto.Valor, System.Data.DbType.Decimal);
             parametros.Add("CodCategoria", objProduto.CodCategoria, System.Data.DbType.Int32);
 
-            Contexto.Executar(SQL_ADICIONAR_PRODUTO, parametros);
+            return Contexto.ExecutarScalar(SQL_ADICIONAR_PRODUTO, parametros);
+        }
+
+        public void AdicionarImagemProduto(IEnumerable<ImagemProduto> lstImagemProduto)
+        {
+            foreach (ImagemProduto objImagem in lstImagemProduto)
+            {
+                var parametros = new DynamicParameters();
+
+                parametros.Add("idProduto", objImagem.IdProduto, System.Data.DbType.Int32);
+                parametros.Add("nome", objImagem.Nome, System.Data.DbType.String, null, 50);
+                parametros.Add("caminho", objImagem.Caminho, System.Data.DbType.String, null, 1000);
+
+                Contexto.Executar(SQL_INSERT_PRODUTO_IMAGEM, parametros);
+            }
         }
 
         public int Editar(Produto objProduto)
@@ -82,9 +113,30 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
 
         public List<Produto> Listar()
         {
-            var parametros = new DynamicParameters();
+            List<Produto> retorno = new List<Produto>();
+            Contexto.Conexao.Query<Produto, ImagemProduto, Produto>(SQL_LISTAR_PRODUTO,
+                (p, i) =>
+                {
+                    if(p.Imagens == null)
+                        p.Imagens = new List<ImagemProduto>();
 
-            return Contexto.Listar<Produto>(SQL_LISTAR_PRODUTO).ToList();
+                    if(p.Codigo == i.IdProduto)
+                        p.Imagens.Add(i);
+
+                    var result = retorno.FirstOrDefault(x => x.Codigo  == p.Codigo);
+
+                    if (result != null)
+                    {
+                        result.Imagens.Add(i);
+                    }
+                    else
+                    {
+                        retorno.Add(p);
+                    }
+                    return p;
+                }, splitOn: "Codigo, idProduto");
+
+            return retorno;
         }
 
         public List<Produto> ListarPorCategoria(int codCategoria)
@@ -104,11 +156,6 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
 
             parametros.Add("Codigo", codProduto, System.Data.DbType.Int32);
             return Contexto.Obter<Produto>(SQL_SELECIONAR_PRODUTO, parametros);
-        }
-
-        public int ObterProximoID()
-        {
-            return Contexto.Obter<int>(SQL_PROXIMO_ID, null);
         }
     }
 }

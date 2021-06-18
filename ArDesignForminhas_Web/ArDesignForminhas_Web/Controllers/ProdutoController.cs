@@ -52,13 +52,12 @@ namespace ArDesignForminhas_Web.Controllers
                 using (TransactionScope scope = new TransactionScope())
                 {
                     var caminhoArquivo = Server.MapPath(CaminhoFotoProduto);
-                    var proximoID = repositorio.ObterProximoID();
-                    var contador = 1;
+                    var proximoID = repositorio.Adicionar(objProduto);
                     var listaImagem = new List<ImagemProduto>();
 
-                    foreach (HttpPostedFileBase objFoto in Request.Files)
+                    for (int i=0; i< Request.Files.Count;i++)
                     {
-                        var nomeArquivo = $"{proximoID}_FOTO_{contador}";
+                        var nomeArquivo = $"{proximoID}_FOTO_{i + 1}.png";
 
                         listaImagem.Add(new ImagemProduto()
                         {
@@ -67,13 +66,10 @@ namespace ArDesignForminhas_Web.Controllers
                             Nome = nomeArquivo
                         });
 
-                        objFoto.SaveAs(caminhoArquivo + nomeArquivo);
-                        contador++;
+                        Request.Files[i].SaveAs(caminhoArquivo + nomeArquivo);
                     }
 
-                    objProduto.Imagens = listaImagem;
-
-                    repositorio.Adicionar(objProduto);
+                    repositorio.AdicionarImagemProduto(listaImagem);
                     
                     scope.Complete();
                 }
@@ -83,7 +79,7 @@ namespace ArDesignForminhas_Web.Controllers
             }
             catch(Exception ex)
             {
-                return View();
+               return RedirectToAction("Index");
             }
         }
 

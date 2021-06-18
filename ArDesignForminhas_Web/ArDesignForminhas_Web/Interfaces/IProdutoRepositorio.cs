@@ -9,9 +9,9 @@ namespace ArDesignForminhas_Web.Interfaces
         Produto ObeterPorCodigo(int codProduto);
         List<Produto> Listar();
         List<Produto> ListarPorCategoria(int codCategoria);
-        void Adicionar(Produto objProduto);
+        int Adicionar(Produto objProduto);
+        void AdicionarImagemProduto(IEnumerable<ImagemProduto> lstImagemProduto);
         int Editar(Produto objProduto);
         void Excluir(int codProduto);
-        int ObterProximoID();
     }
 }

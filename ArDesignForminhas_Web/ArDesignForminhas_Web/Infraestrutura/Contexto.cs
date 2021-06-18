@@ -10,7 +10,7 @@ namespace ArDesignForminhas_Web.Infraestrutura
         /// <summary>
         /// Propriedade que armazena a string de conexão com o Banco
         /// </summary>
-        private static MySqlConnection Conexao
+        public static MySqlConnection Conexao
         {
             get 
             {
@@ -79,11 +79,17 @@ namespace ArDesignForminhas_Web.Infraestrutura
             }
         }
 
-        public static object ListarQueryMultiplo(string sql, DynamicParameters parameters)
+        /// <summary>
+        /// Método responsável por executar um comando no banco. Como Insert, Update e Delete
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns>Quantidade de linhas afetadas</returns>
+        public static int ExecutarScalar(string sql, DynamicParameters parameters)
         {
             using (var conn = Conexao)
             {
-                return Conexao.QueryMultiple(sql, parameters);
+                return Conexao.ExecuteScalar<int>(sql, parameters);
             }
         }
     }
