@@ -47,22 +47,23 @@ namespace ArDesignForminhas_Web.Controllers
         [HttpPost]
         public ActionResult Cadastrar(Produto objProduto)
         {
+            var listaImagem = new List<ImagemProduto>();
+            var caminhoArquivo = Server.MapPath(CaminhoFotoProduto);
             try
             {
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    var caminhoArquivo = Server.MapPath(CaminhoFotoProduto);
-                    var proximoID = repositorio.Adicionar(objProduto);
-                    var listaImagem = new List<ImagemProduto>();
+                    
+                    var idProduto = repositorio.Adicionar(objProduto);
 
                     for (int i=0; i< Request.Files.Count;i++)
                     {
-                        var nomeArquivo = $"{proximoID}_FOTO_{i + 1}.png";
+                        var nomeArquivo = $"{idProduto}_FOTO_{i + 1}.png";
 
                         listaImagem.Add(new ImagemProduto()
                         {
                             Caminho = CaminhoFotoProduto + nomeArquivo,
-                            IdProduto = proximoID,
+                            IdProduto = idProduto,
                             Nome = nomeArquivo
                         });
 
@@ -74,19 +75,27 @@ namespace ArDesignForminhas_Web.Controllers
                     scope.Complete();
                 }
 
-
                 return RedirectToAction("Index");
             }
             catch(Exception ex)
             {
+                // Excluindo fotos salvas no disco
+                foreach(var objFoto in listaImagem)
+                    System.IO.File.Delete(caminhoArquivo + objFoto.Nome);
+
                return RedirectToAction("Index");
             }
         }
 
         // GET: Produto/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Editar(int id)
         {
-            return View(repositorio.ObeterPorCodigo(id));
+            var objProduto = repositorio.ObeterPorCodigo(id);
+
+            PreencheViewBagCategoria();
+            PreencheViewBagCaminhoImagem(objProduto);
+            
+            return View(objProduto);
         }
 
         // POST: Produto/Edit/5
@@ -103,12 +112,6 @@ namespace ArDesignForminhas_Web.Controllers
             {
                 return View();
             }
-        }
-
-        // GET: Produto/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
         // POST: Produto/Delete/5
@@ -135,6 +138,19 @@ namespace ArDesignForminhas_Web.Controllers
                 lista,
                 "Codigo",
                 "Nome");
+        }
+
+        private void PreencheViewBagCaminhoImagem(Produto objProduto)
+        {
+            List<string> lista = new List<string>();
+            string dominio = $"{Request.Url.Scheme}://{Request.Url.Authority}";
+
+            foreach (var obj in objProduto.Imagens)
+            {
+                lista.Add($"'{dominio}{CaminhoFotoProduto.Substring(1)}{obj.Nome}'");
+            }
+
+            ViewBag.Arquivos = lista;
         }
     }
 }

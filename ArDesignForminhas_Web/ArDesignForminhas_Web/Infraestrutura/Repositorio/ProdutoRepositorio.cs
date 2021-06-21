@@ -44,13 +44,12 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
 
         private const string SQL_EXCLUIR_PRODUTO = @"delete from produto where Codigo = @Codigo";
 
-        private const string SQL_PROXIMO_ID = @"select case count(codigo) when 0
-	                                                    then 1
-                                                        else max(codigo) + 1
-                                                        end as 'ProximoID' 
-                                                from produto";
-
-
+        private const string SQL_OBTER_PRODUTO_IMAGEM = @"select	idimagem,
+		                                                            idProduto,
+		                                                            nome,
+                                                                    caminho
+                                                            from imagemproduto
+                                                            where idProduto = @Codigo";
 
         private const string SQL_INSERT_PRODUTO_IMAGEM = @"INSERT INTO imagemproduto
                                                             (`idProduto`,
@@ -152,10 +151,15 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
 
         public Produto ObeterPorCodigo(int codProduto)
         {
+            
             var parametros = new DynamicParameters();
 
             parametros.Add("Codigo", codProduto, System.Data.DbType.Int32);
-            return Contexto.Obter<Produto>(SQL_SELECIONAR_PRODUTO, parametros);
+            var objProduto = Contexto.Obter<Produto>(SQL_SELECIONAR_PRODUTO, parametros);
+
+            objProduto.Imagens = Contexto.Listar<ImagemProduto>(SQL_OBTER_PRODUTO_IMAGEM, parametros).ToList();
+
+            return objProduto;
         }
     }
 }
