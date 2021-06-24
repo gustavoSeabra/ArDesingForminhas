@@ -11,6 +11,7 @@ namespace ArDesignForminhas_Web.Interfaces
         List<Produto> ListarPorCategoria(int codCategoria);
         int Adicionar(Produto objProduto);
         void AdicionarImagemProduto(IEnumerable<ImagemProduto> lstImagemProduto);
+        void ExcluirImagemProduto(int codProduto);
         int Editar(Produto objProduto);
         void Excluir(int codProduto);
     }

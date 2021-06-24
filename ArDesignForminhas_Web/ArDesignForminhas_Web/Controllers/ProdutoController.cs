@@ -79,9 +79,7 @@ namespace ArDesignForminhas_Web.Controllers
             }
             catch(Exception ex)
             {
-                // Excluindo fotos salvas no disco
-                foreach(var objFoto in listaImagem)
-                    System.IO.File.Delete(caminhoArquivo + objFoto.Nome);
+                ExcluirImagensProduto(caminhoArquivo, listaImagem);
 
                return RedirectToAction("Index");
             }
@@ -100,33 +98,76 @@ namespace ArDesignForminhas_Web.Controllers
 
         // POST: Produto/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Produto objProduto)
         {
+            var listaImagem = new List<ImagemProduto>();
+            var caminhoArquivo = Server.MapPath(CaminhoFotoProduto);
             try
             {
-                // TODO: Add update logic here
+                using (TransactionScope scope = new TransactionScope())
+                {
+
+                    repositorio.Editar(objProduto);
+                    // Excluindo fotos salvas no disco
+                    ExcluirImagensProduto(caminhoArquivo, objProduto.Imagens);
+                    repositorio.ExcluirImagemProduto(objProduto.Codigo);
+
+                    for (int i = 0; i < Request.Files.Count; i++)
+                    {
+                        var nomeArquivo = $"{objProduto.Codigo}_FOTO_{i + 1}.png";
+
+                        listaImagem.Add(new ImagemProduto()
+                        {
+                            Caminho = CaminhoFotoProduto + nomeArquivo,
+                            IdProduto = objProduto.Codigo,
+                            Nome = nomeArquivo
+                        });
+
+                        Request.Files[i].SaveAs(caminhoArquivo + nomeArquivo);
+                    }
+
+                    repositorio.AdicionarImagemProduto(listaImagem);
+
+                    scope.Complete();
+                }
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                // Excluindo fotos salvas no disco
+                ExcluirImagensProduto(caminhoArquivo, objProduto.Imagens);
+
+                return RedirectToAction("Index");
             }
         }
 
         // POST: Produto/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                var caminhoArquivo = Server.MapPath(CaminhoFotoProduto);
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    var objProduto = repositorio.ObeterPorCodigo(id);
+
+                    // Exclui arquivos fisicamente
+                    ExcluirImagensProduto(caminhoArquivo, objProduto.Imagens);
+                    
+                    // Exclui registros no banco
+                    repositorio.ExcluirImagemProduto(id);
+                    repositorio.Excluir(id);
+
+                    scope.Complete();
+                }
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
 
@@ -151,6 +192,12 @@ namespace ArDesignForminhas_Web.Controllers
             }
 
             ViewBag.Arquivos = lista;
+        }
+
+        private void ExcluirImagensProduto(string caminhoArquivo, List<ImagemProduto> listaImagem)
+        {
+            foreach (var objFoto in listaImagem)
+                System.IO.File.Delete(caminhoArquivo + objFoto.Nome);
         }
     }
 }

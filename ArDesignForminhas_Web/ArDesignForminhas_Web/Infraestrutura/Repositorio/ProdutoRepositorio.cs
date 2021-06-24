@@ -60,6 +60,8 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
                                                              @nome,
                                                              @caminho)";
 
+        private const string SQL_EXCLUIR_PRODUTO_IMAGEM = @"delete from imagemproduto where idProduto = @idProduto";
+
         #endregion
 
         public int Adicionar(Produto objProduto)
@@ -108,6 +110,15 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
             parametros.Add("Codigo", codProduto, System.Data.DbType.Int32);
 
             Contexto.Executar(SQL_EXCLUIR_PRODUTO, parametros);
+        }
+
+        public void ExcluirImagemProduto(int codProduto)
+        {
+            var parametros = new DynamicParameters();
+
+            parametros.Add("Codigo", codProduto, System.Data.DbType.Int32);
+
+            Contexto.Executar(SQL_EXCLUIR_PRODUTO_IMAGEM, parametros);
         }
 
         public List<Produto> Listar()
