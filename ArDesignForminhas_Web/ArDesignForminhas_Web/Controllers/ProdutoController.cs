@@ -3,9 +3,10 @@ using ArDesignForminhas_Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Transactions;
-using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace ArDesignForminhas_Web.Controllers
 {
@@ -23,7 +24,7 @@ namespace ArDesignForminhas_Web.Controllers
 
         // GET: Produto
         public ActionResult Index() => View();
-        
+
         [HttpGet]
         public ActionResult Listar()
         {
@@ -53,35 +54,39 @@ namespace ArDesignForminhas_Web.Controllers
             {
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    
+
                     var idProduto = repositorio.Adicionar(objProduto);
 
-                    for (int i=0; i< Request.Files.Count;i++)
+                    for (int i = 0; i < Request.Files.Count; i++)
                     {
-                        var nomeArquivo = $"{idProduto}_FOTO_{i + 1}.png";
-
-                        listaImagem.Add(new ImagemProduto()
+                        if (!string.IsNullOrEmpty(Request.Files[i].FileName))
                         {
-                            Caminho = CaminhoFotoProduto + nomeArquivo,
-                            IdProduto = idProduto,
-                            Nome = nomeArquivo
-                        });
+                            var nomeArquivo = $"{idProduto}_FOTO_{i + 1}.png";
 
-                        Request.Files[i].SaveAs(caminhoArquivo + nomeArquivo);
+                            listaImagem.Add(new ImagemProduto()
+                            {
+                                Caminho = CaminhoFotoProduto + nomeArquivo,
+                                IdProduto = idProduto,
+                                Nome = nomeArquivo
+                            });
+
+                            Request.Files[i].SaveAs(caminhoArquivo + nomeArquivo);
+                        }
                     }
 
-                    repositorio.AdicionarImagemProduto(listaImagem);
-                    
+                    if (listaImagem.Any())
+                        repositorio.AdicionarImagemProduto(listaImagem);
+
                     scope.Complete();
                 }
 
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ExcluirImagensProduto(caminhoArquivo, listaImagem);
 
-               return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
         }
 
@@ -92,20 +97,25 @@ namespace ArDesignForminhas_Web.Controllers
 
             PreencheViewBagCategoria();
             PreencheViewBagCaminhoImagem(objProduto);
-            
+
             return View(objProduto);
         }
 
         // POST: Produto/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Produto objProduto)
+        public ActionResult Editar(int id, FormCollection collection)
         {
             var listaImagem = new List<ImagemProduto>();
             var caminhoArquivo = Server.MapPath(CaminhoFotoProduto);
+            Produto objProduto = this.repositorio.ObeterPorCodigo(id);
             try
             {
                 using (TransactionScope scope = new TransactionScope())
                 {
+                    objProduto.Nome = collection["Nome"];
+                    objProduto.Valor = Convert.ToDecimal(collection["Valor"]);
+                    objProduto.CodCategoria = Convert.ToInt32(collection["CodCategoria"]);
+                    objProduto.Descricao = collection["Descricao"];
 
                     repositorio.Editar(objProduto);
                     // Excluindo fotos salvas no disco
@@ -144,8 +154,13 @@ namespace ArDesignForminhas_Web.Controllers
 
         // POST: Produto/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id)
+        public string Delete(int id)
         {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            Resposta objResposta = new Resposta();
+
+            objResposta.Acao = "Delete";
+
             try
             {
                 var caminhoArquivo = Server.MapPath(CaminhoFotoProduto);
@@ -155,21 +170,27 @@ namespace ArDesignForminhas_Web.Controllers
 
                     // Exclui arquivos fisicamente
                     ExcluirImagensProduto(caminhoArquivo, objProduto.Imagens);
-                    
+
                     // Exclui registros no banco
                     repositorio.ExcluirImagemProduto(id);
                     repositorio.Excluir(id);
 
                     scope.Complete();
-                }
 
-                return RedirectToAction("Index");
+                    objResposta.Status = HttpStatusCode.OK;
+                    objResposta.Mensagem = string.Empty;
+                }
             }
-            catch
+            catch(Exception ex)
             {
-                return RedirectToAction("Index");
+                objResposta.Status = HttpStatusCode.BadRequest;
+                objResposta.Mensagem = ex.Message;
             }
+
+            return serializer.Serialize(objResposta);
         }
+
+        #region Métodos internos
 
         private void PreencheViewBagCategoria()
         {
@@ -199,5 +220,7 @@ namespace ArDesignForminhas_Web.Controllers
             foreach (var objFoto in listaImagem)
                 System.IO.File.Delete(caminhoArquivo + objFoto.Nome);
         }
+
+        #endregion
     }
 }

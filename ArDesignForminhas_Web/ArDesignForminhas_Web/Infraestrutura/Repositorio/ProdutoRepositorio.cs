@@ -116,7 +116,7 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
         {
             var parametros = new DynamicParameters();
 
-            parametros.Add("Codigo", codProduto, System.Data.DbType.Int32);
+            parametros.Add("idProduto", codProduto, System.Data.DbType.Int32);
 
             Contexto.Executar(SQL_EXCLUIR_PRODUTO_IMAGEM, parametros);
         }
@@ -130,14 +130,19 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
                     if(p.Imagens == null)
                         p.Imagens = new List<ImagemProduto>();
 
-                    if(p.Codigo == i.IdProduto)
-                        p.Imagens.Add(i);
+                    if(i!=null)
+                    {
+                        if (p.Codigo == i.IdProduto)
+                            p.Imagens.Add(i);
+                    }
+                    
 
                     var result = retorno.FirstOrDefault(x => x.Codigo  == p.Codigo);
 
                     if (result != null)
                     {
-                        result.Imagens.Add(i);
+                        if (i != null)
+                            result.Imagens.Add(i);
                     }
                     else
                     {
