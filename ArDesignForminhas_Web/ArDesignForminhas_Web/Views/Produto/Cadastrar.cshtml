@@ -1,0 +1,79 @@
+﻿@model ArDesignForminhas_Web.Models.Produto
+@{
+    Layout = "~/Views/Shared/_LayoutCadastro.cshtml";
+}
+
+
+@using (Html.BeginForm("Cadastrar", "Produto", FormMethod.Post, new { enctype = "multipart/form-data"}))
+{
+    <div class="row">
+        <div class="col-md-9">
+            <h2>Cadastro de Produto</h2>
+        </div>
+        <div class="col-md-3 d-flex justify-content-end">
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="fas fa-save"> Salvar</i>
+            </button>
+            <button type="button" onclick="location.href='@Url.Action("Index", "Produto")'" class="btn btn-outline-secondary">
+                <i class="fas fa-list-alt"> Cancelar</i>
+            </button>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label class="font-weight-bold">Nome: </label>
+            @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">Valor: (R$)</label>
+            @Html.TextBoxFor(model => model.Valor, new { id = "txtValor", @class = "form-control" })
+        </div>
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">Categoria: </label>
+            @Html.DropDownListFor(model => model.CodCategoria, ((IEnumerable<SelectListItem>)ViewBag.Categoria)
+                 .Select(option => new SelectListItem
+                 {
+                     Text = option.Text,
+                     Value = option.Value,
+                     Selected = (Model != null) && (Model.CodCategoria == Convert.ToInt32(option.Value))
+                 }), "- Selecione -", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label class="font-weight-bold">Descrição: </label>
+            @Html.TextAreaFor(model => model.Descricao, new { @class = "form-control", rows = "3" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <div class="file-loading">
+                <label>Foto: </label>
+                <input id="input-b6" name="input-b6[]" type="file" multiple accept="image/*">
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        // Máscara do campo valor
+        $('#txtValor').mask('000.000.000.000.000,00', { reverse: true });
+
+        $("#input-b6").fileinput({
+            theme: 'fas',
+            language: 'pt-BR',
+            showUpload: false,
+            dropZoneEnabled: false,
+            maxFileCount: 10,
+            mainClass: "input-group-lg"
+        });
+    });
+</script>
+
+

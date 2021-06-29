@@ -50,7 +50,10 @@ namespace ArDesignForminhas_Web
         public static void RegistraComponentes()
         {
             var container = new UnityContainer();
+
             container.RegisterType<ICategoriaRepositorio, CategoriaRepositorio>();
+            container.RegisterType<IProdutoRepositorio, ProdutoRepositorio>();
+
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

@@ -9,6 +9,7 @@ namespace ArDesignForminhas_Web.Models
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
-        public virtual ICollection<Imagem> ListaImagens { get; set; }
+        public int CodCategoria { get; set; }
+        public List<ImagemProduto> Imagens { get; set; }
     }
 }
