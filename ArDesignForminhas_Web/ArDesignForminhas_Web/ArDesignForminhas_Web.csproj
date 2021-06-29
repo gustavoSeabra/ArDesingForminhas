@@ -146,6 +146,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
@@ -153,12 +154,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infraestrutura\Contexto.cs" />
+    <Compile Include="Infraestrutura\Repositorio\BannerRepositorio.cs" />
     <Compile Include="Infraestrutura\Repositorio\CategoriaRepositorio.cs" />
     <Compile Include="Infraestrutura\Repositorio\ProdutoRepositorio.cs" />
     <Compile Include="Interfaces\ICategoriaRepositorio.cs" />
+    <Compile Include="Interfaces\IImagemHomeRepositorio.cs" />
     <Compile Include="Interfaces\IProdutoRepositorio.cs" />
     <Compile Include="Models\Categoria.cs" />
-    <Compile Include="Models\Imagem.cs" />
+    <Compile Include="Models\Banner.cs" />
     <Compile Include="Models\ImagemProduto.cs" />
     <Compile Include="Models\Produto.cs" />
     <Compile Include="Models\Resposta.cs" />
@@ -211,6 +214,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Cadastro\Banner\Listar.js" />
     <Content Include="Scripts\Cadastro\Categoria\Listar.js" />
     <Content Include="Scripts\Cadastro\Produto\Listar.js" />
     <Content Include="Scripts\DataTable.js" />
@@ -408,6 +412,8 @@
     <Content Include="Views\Categoria\_Listar.cshtml" />
     <Content Include="Views\Produto\_Listar.cshtml" />
     <Content Include="Views\Produto\Editar.cshtml" />
+    <Content Include="Views\Banner\Index.cshtml" />
+    <Content Include="Views\Banner\_Listar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

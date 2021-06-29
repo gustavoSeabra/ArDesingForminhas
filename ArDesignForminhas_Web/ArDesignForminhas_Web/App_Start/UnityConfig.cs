@@ -53,6 +53,7 @@ namespace ArDesignForminhas_Web
 
             container.RegisterType<ICategoriaRepositorio, CategoriaRepositorio>();
             container.RegisterType<IProdutoRepositorio, ProdutoRepositorio>();
+            container.RegisterType<IBannerRepositorio, BannerRepositorio>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
