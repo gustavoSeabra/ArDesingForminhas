@@ -414,6 +414,7 @@
     <Content Include="Views\Produto\Editar.cshtml" />
     <Content Include="Views\Banner\Index.cshtml" />
     <Content Include="Views\Banner\_Listar.cshtml" />
+    <Content Include="Views\Banner\Cadastrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

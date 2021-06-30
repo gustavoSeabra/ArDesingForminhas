@@ -1,0 +1,56 @@
+﻿@model ArDesignForminhas_Web.Models.Banner
+
+@{
+    ViewBag.Title = "Cadastrar";
+    Layout = "~/Views/Shared/_LayoutCadastro.cshtml";
+}
+
+@using (Html.BeginForm("Cadastrar", "Banner", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-md-9">
+            <h2>Cadastro de Banner da Home</h2>
+        </div>
+        <div class="col-md-3 d-flex justify-content-end">
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="fas fa-save"> Salvar</i>
+            </button>
+            <button type="button" onclick="location.href='@Url.Action("Index", "Banner")'" class="btn btn-outline-secondary">
+                <i class="fas fa-list-alt"> Cancelar</i>
+            </button>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="form-group form-check col-md-12">
+            @Html.CheckBoxFor(model => model.EhHome, new { @class = "form-check-input" })
+            <label class="form-check-label font-weight-bold">Exibir na home? </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <div class="file-loading">
+                <label>Foto: </label>
+                <input id="input-b6" name="input-b6[]" type="file" accept="image/*">
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        // Máscara do campo valor
+        $('#txtValor').mask('000.000.000.000.000,00', { reverse: true });
+
+        $("#input-b6").fileinput({
+            theme: 'fas',
+            language: 'pt-BR',
+            showUpload: false,
+            dropZoneEnabled: false,
+            maxFileCount: 10,
+            mainClass: "input-group-lg"
+        });
+    });
+</script>
