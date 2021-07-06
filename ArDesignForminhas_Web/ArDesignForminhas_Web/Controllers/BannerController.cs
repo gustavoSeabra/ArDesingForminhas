@@ -11,7 +11,7 @@ namespace ArDesignForminhas_Web.Controllers
     public class BannerController : Controller
     {
         private IBannerRepositorio repositorio;
-        private const string CaminhoBanner = "~/Content/Imagens/Home/";
+        private const string CaminhoBanner = "/Content/Imagens/Home/";
 
         public BannerController(IBannerRepositorio _repositorio)
         {
@@ -35,7 +35,6 @@ namespace ArDesignForminhas_Web.Controllers
             return View();
         }
 
-        // POST: Produto/Create
         [HttpPost]
         public ActionResult Cadastrar(Banner objBanner)
         {
@@ -70,6 +69,34 @@ namespace ArDesignForminhas_Web.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        public ActionResult Editar(int id)
+        {
+            var objBanner = repositorio.ObeterPorCodigo(id);
+            PreencheViewBagCaminhoImagem(objBanner);
+            return View(objBanner);
+        }
+
+
+        [HttpPost]
+        public ActionResult Editar(int id, Banner collection)
+        {
+            try
+            {
+                var oldBanner = repositorio.ObeterPorCodigo(id);
+
+                oldBanner.EhHome = collection.EhHome;
+
+                this.repositorio.Editar(oldBanner);
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
+            
+            return RedirectToAction("Index");
+        }
+
 
         // POST: BAnner/Delete/5
         [HttpPost]
@@ -112,6 +139,13 @@ namespace ArDesignForminhas_Web.Controllers
         private void ExcluirBanner(string caminhoBanner)
         {
             System.IO.File.Delete(caminhoBanner);
+        }
+
+        private void PreencheViewBagCaminhoImagem(Banner objBanner)
+        {
+            string dominio = $"{Request.Url.Scheme}://{Request.Url.Authority}/";
+
+            ViewBag.Arquivo = $"'{dominio}{objBanner.Caminho.Substring(1)}'";
         }
 
         #endregion

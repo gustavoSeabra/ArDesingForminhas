@@ -29,8 +29,7 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
 
         private const string SQL_EDITAR_IMAGEM = @"UPDATE imagem
                                                     SET
-                                                    EhHome = @EhHome,
-                                                    Caminho = @Caminho
+                                                    EhHome = @EhHome
                                                     WHERE Codigo = @Codigo;";
 
         public int Adicionar(Banner objBanner)
@@ -47,7 +46,6 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
         {
             var parametros = new DynamicParameters();
 
-            parametros.Add("Caminho", objBanner.Caminho, System.Data.DbType.String, null, 500);
             parametros.Add("Codigo", objBanner.Codigo, System.Data.DbType.Int32);
             parametros.Add("EhHome", objBanner.EhHome, System.Data.DbType.Boolean);
 

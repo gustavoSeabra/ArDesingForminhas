@@ -199,6 +199,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DataTable.css" />
+    <Content Include="Content\Imagens\Home\3_BANNER.png" />
+    <Content Include="Content\Imagens\Home\4_BANNER.png" />
+    <Content Include="Content\Imagens\Home\5_BANNER.png" />
     <Content Include="Content\Imagens\Home\Home1.jpg" />
     <Content Include="Content\Imagens\Home\Home2.jpg" />
     <Content Include="Content\Imagens\Home\Home3.jpg" />
@@ -415,6 +418,7 @@
     <Content Include="Views\Banner\Index.cshtml" />
     <Content Include="Views\Banner\_Listar.cshtml" />
     <Content Include="Views\Banner\Cadastrar.cshtml" />
+    <Content Include="Views\Banner\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
