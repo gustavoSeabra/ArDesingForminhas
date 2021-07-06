@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ArDesignForminhas_Web.Models
 {
-    public class Imagem
+    public class Banner
     {
         public int Codigo { get; set; }
         public string Caminho { get; set; }

@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Cadastro de Baner da Home";
+    Layout = "~/Views/Shared/_LayoutCadastro.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h2>Banner da Home</h2>
+    </div>
+    <div class="col-md-3 d-flex justify-content-end">
+        @Html.ActionLink(" Cadastrar", "Cadastrar", "Banner", null, new { @class = "btn btn-outline-primary fas fa-plus-square" })
+    </div>
+</div>
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="grid"></div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var urlIndex = "@Url.Action("Listar", "Banner")";
+        var urlDelete = "@Url.Action("Delete", "Banner")"
+
+        function PreencheGrid() {
+            $("#grid").load(urlIndex, function () {
+            });
+        }
+
+        $(document).ready(function () {
+            PreencheGrid();
+        });
+    </script>
+}

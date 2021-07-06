@@ -1,0 +1,40 @@
+﻿@model ArDesignForminhas_Web.Models.Banner
+
+@{
+    ViewBag.Title = "Editar";
+    Layout = "~/Views/Shared/_LayoutCadastro.cshtml";
+}
+
+@using (Html.BeginForm("Editar", "Banner", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-9">
+            <h2>Editar Banner da Home</h2>
+        </div>
+        <div class="col-md-3 d-flex justify-content-end">
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="fas fa-save"> Salvar</i>
+            </button>
+            <button type="button" onclick="location.href='@Url.Action("Index", "Banner")'" class="btn btn-outline-secondary">
+                <i class="fas fa-list-alt"> Cancelar</i>
+            </button>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="card" style="width: 38rem;">
+            <img class="card-img-top" src="@Html.DisplayFor(model => model.Caminho)" alt="Banner da home">
+            <div class="card-body">
+                <h5 class="card-title">
+                    @Html.CheckBoxFor(model => model.EhHome, new { @class = "form-check-input" })
+                    <label class="form-check-label font-weight-bold">Exibir na home? </label>
+                </h5>
+                <p class="card-text">&nbsp;</p>
+            </div>
+        </div>
+    </div>
+
+}
+

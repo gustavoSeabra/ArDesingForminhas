@@ -32,7 +32,7 @@ namespace ArDesignForminhas_Web.Infraestrutura
         {
             using(var conn = Conexao)
             {
-                return Conexao.QuerySingle<T>(sql, parameters);
+                return conn.QuerySingle<T>(sql, parameters);
             }
         }
 
@@ -47,7 +47,7 @@ namespace ArDesignForminhas_Web.Infraestrutura
         {
             using (var conn = Conexao)
             {
-                return Conexao.Query<T>(sql, parameters);
+                return conn.Query<T>(sql, parameters);
             }
         }
 
@@ -61,7 +61,7 @@ namespace ArDesignForminhas_Web.Infraestrutura
         {
             using (var conn = Conexao)
             {
-                return Conexao.Query<T>(sql);
+                return conn.Query<T>(sql);
             }
         }
 
@@ -75,7 +75,7 @@ namespace ArDesignForminhas_Web.Infraestrutura
         {
             using (var conn = Conexao)
             {
-                return Conexao.Execute(sql, parameters);
+                return conn.Execute(sql, parameters);
             }
         }
 
@@ -89,7 +89,7 @@ namespace ArDesignForminhas_Web.Infraestrutura
         {
             using (var conn = Conexao)
             {
-                return Conexao.ExecuteScalar<int>(sql, parameters);
+                return conn.ExecuteScalar<int>(sql, parameters);
             }
         }
     }
