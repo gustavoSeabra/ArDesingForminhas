@@ -1,36 +1,17 @@
-﻿@{
+﻿@model ArDesignForminhas_Web.ViewModels.HomeViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="row mt-5"  align="center">
-    <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="~/Content/Imagens/Produto/Produto1.PNG" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="~/Content/Imagens/Produto/Produto2.PNG" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Card title 2</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="~/Content/Imagens/Produto/Produto3.PNG" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Card title 3</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-    </div>
+<section>
+    @Html.Partial("_Banner", Model.ListaBanner)
+</section>
+
+<div class="container body-content">
+
+    <section>
+        @Html.Partial("_Destaque")
+    </section>
+
 </div>

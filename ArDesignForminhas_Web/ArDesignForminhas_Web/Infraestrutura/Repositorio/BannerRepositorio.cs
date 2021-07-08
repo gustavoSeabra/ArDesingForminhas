@@ -15,6 +15,12 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
 		                                                    EhHome
                                                     from imagem";
 
+        private const string SQL_LISTAR_IMAGEM_HOME = @"select	Codigo,
+		                                                    Caminho,
+		                                                    EhHome
+                                                    from imagem
+                                                    where EhHome = @EhHome";
+
         private const string SQL_OBTER_IMAGEM = @"select	Codigo,
 		                                                    Caminho,
 		                                                    EhHome
@@ -64,6 +70,15 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
         public List<Banner> Listar()
         {
             return Contexto.Listar<Banner>(SQL_LISTAR_IMAGEM).ToList();
+        }
+
+        public List<Banner> ListarHome()
+        {
+            var parametros = new DynamicParameters();
+
+            parametros.Add("EhHome", true, System.Data.DbType.Boolean);
+
+            return Contexto.Listar<Banner>(SQL_LISTAR_IMAGEM_HOME, parametros).ToList();
         }
 
         public Banner ObeterPorCodigo(int codBanner)
