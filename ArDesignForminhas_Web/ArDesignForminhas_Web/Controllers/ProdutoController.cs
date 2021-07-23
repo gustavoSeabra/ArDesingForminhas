@@ -14,7 +14,7 @@ namespace ArDesignForminhas_Web.Controllers
     {
         private ICategoriaRepositorio categoriaRepositorio;
         private IProdutoRepositorio repositorio;
-        private const string CaminhoFotoProduto = "~/Content/Imagens/Produto/";
+        private const string CaminhoFotoProduto = "/Content/Imagens/Produto/";
 
         public ProdutoController(IProdutoRepositorio _repositorio, ICategoriaRepositorio _repositorioCategoria)
         {
@@ -205,7 +205,7 @@ namespace ArDesignForminhas_Web.Controllers
         private void PreencheViewBagCaminhoImagem(Produto objProduto)
         {
             List<string> lista = new List<string>();
-            string dominio = $"{Request.Url.Scheme}://{Request.Url.Authority}";
+            string dominio = $"{Request.Url.Scheme}://{Request.Url.Authority}/";
 
             foreach (var obj in objProduto.Imagens)
             {

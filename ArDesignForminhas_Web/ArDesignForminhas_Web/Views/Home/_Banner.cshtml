@@ -11,14 +11,13 @@
 
             @foreach (var item in Model)
             {
-                
-                    <div class="carousel-item @(i==0 ? "active":string.Empty)">
-                    <img class="d-block w-100" src="@Html.DisplayFor(modelitem => item.Caminho)" alt="First slide">
+                <div class="carousel-item @(i==0 ? "active":string.Empty)">
+                    <img class="d-block w-100" src="@Html.DisplayFor(modelitem => item.Caminho)" alt="First slide" width="1349px" height="500px">
                 </div>
                 @( i++ )
-         }
+            }
 
-            </div>
+        </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>

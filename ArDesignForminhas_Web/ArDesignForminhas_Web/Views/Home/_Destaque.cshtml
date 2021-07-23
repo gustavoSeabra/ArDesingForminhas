@@ -1,33 +1,41 @@
-﻿
+﻿@model IEnumerable<ArDesignForminhas_Web.Models.Produto>
+@{ var i = 0; }
+
 <div class="row mt-5" align="center">
-    <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="~/Content/Imagens/Produto/Produto1.PNG" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-img-top">
+                    <div id="carouselDestaque_@Html.DisplayFor(prd => item.Codigo)" class="carousel slide m-0" data-ride="carousel">
+                        <div class="carousel-inner">
+                            @foreach (var imagem in item.Imagens)
+                            {
+                                <div class="carousel-item @(i==0 ? "active":string.Empty)">
+                                    <img class="d-block w-100" src="@Html.DisplayFor(img => imagem.Caminho)" width="286px" height="286px">
+                                </div>
+                                @( i++ )
+                            }
+                            @( i = 0 )
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselDestaque_@Html.DisplayFor(prd => item.Codigo)" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselDestaque_@Html.DisplayFor(prd => item.Codigo)" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(prd => item.Nome)</h5>
+                    <p class="card-text">@Html.DisplayFor(prd => item.Descricao)</p>
+                    <a href="#" class="btn btn-primary">Detalhes</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="~/Content/Imagens/Produto/Produto2.PNG" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Card title 2</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="~/Content/Imagens/Produto/Produto3.PNG" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Card title 3</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-    </div>
+    }
+
 </div>

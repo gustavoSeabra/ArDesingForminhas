@@ -43,23 +43,23 @@ namespace ArDesignForminhas_Web.Controllers
 
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                if (Request.Files[0] != null && !string.IsNullOrEmpty(Request.Files[0].FileName))
                 {
-                    if (Request.Files[0] != null && !string.IsNullOrEmpty(Request.Files[0].FileName))
-                    {
-                        var idBanner = repositorio.Adicionar(objBanner);
-                        nomeArquivo = $"{idBanner}_BANNER.png";
+                    var idBanner = repositorio.Adicionar(objBanner);
+                    nomeArquivo = $"{idBanner}_BANNER.png";
 
+                    using (TransactionScope scope = new TransactionScope())
+                    {
                         Request.Files[0].SaveAs(caminhoArquivo + nomeArquivo);
 
                         objBanner.Codigo = idBanner;
                         objBanner.Caminho = CaminhoBanner + nomeArquivo;
 
                         this.repositorio.Editar(objBanner);
+                        scope.Complete();
                     }
-
-                    scope.Complete();
                 }
+
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

@@ -11,10 +11,12 @@ namespace ArDesignForminhas_Web.Controllers
     public class HomeController : Controller
     {
         private IBannerRepositorio repositorioBanner;
+        private IProdutoRepositorio repositorioProduto;
 
-        public HomeController(IBannerRepositorio _repositorio)
+        public HomeController(IBannerRepositorio _repositorio, IProdutoRepositorio _repositorioProduto)
         {
             this.repositorioBanner = _repositorio;
+            this.repositorioProduto = _repositorioProduto;
         }
 
         public ActionResult Index()
@@ -41,6 +43,7 @@ namespace ArDesignForminhas_Web.Controllers
             var objViewModel = new HomeViewModel();
 
             objViewModel.ListaBanner = repositorioBanner.ListarHome();
+            objViewModel.ListaProdutoDestaque = repositorioProduto.ListarDestaque();
 
             return objViewModel;
         }
