@@ -13,9 +13,23 @@
     @Scripts.Render("~/bundles/fontawesome")
     @Styles.Render("~/Content/css")
     @RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            var box = $('#ulMenu');
+            $.ajax({
+                url: "/home/GetMenu",
+                dataType: "JSON",
+                success: function (res) {
+                    $.each(res, function (i, v) {
+                        box.append('<li class="p-2"><a href="/categoria/detalhes/' + v.Id + '">' + v.Nome + '</a></li>');
+                    })
+                }
+            });
+        });
+    </script>
 </head>
 <body>
-
+    
     <nav class="navbar navbar-expand-xl navbar-light bg-light">
         <div class="container">
             <!-- Brand -->
@@ -28,10 +42,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="p-2">@Html.ActionLink("Início", "Index", "Home")</li>
-                    <li class="p-2">@Html.ActionLink("Sobre", "About", "Home")</li>
-                    <li class="p-2">@Html.ActionLink("Contato", "Contact", "Home")</li>
+                <ul class="navbar-nav" id="ulMenu">
                 </ul>
                 <a href='@Url.Action("Index", "Home")' class="navbar-brand mx-auto d-none d-xl-block">
                     <img src="~/Content/Imagens/Logo_SemFundo.png" width="70" height="40" />
@@ -41,9 +52,28 @@
         </div>
     </nav>
     @RenderBody()
-    <hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - Ar Desing Forminhas</p>
+    <br />
+    <footer class="bg-dark bg-cover" style="background-image: url(./Content/Imagens/Footer.png)">
+        <div class="py-12 border-bottom border-gray-700">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        &nbsp;
+                    </div>
+                    <div class="col-6 col-sm">&nbsp;<br /></div>
+                    <div class="col-6 col-sm">&nbsp;<br /></div>
+                    <div class="col-6 col-sm">&nbsp;<br /></div>
+                    <div class="col-6 col-sm">&nbsp;<br /></div>
+                </div>
+            </div>
+        </div>
+        <div class="py-6">
+            <div class="container">
+                <div class="row">
+                    <p class="mb-3 mb-md-0 font-size-xxs text-muted">&copy; @DateTime.Now.Year - Ar Desing Forminhas</p>
+                </div>
+            </div>
+        </div>
     </footer>
 
 

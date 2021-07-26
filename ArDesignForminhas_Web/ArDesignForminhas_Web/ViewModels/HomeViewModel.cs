@@ -10,5 +10,6 @@ namespace ArDesignForminhas_Web.ViewModels
     {
         public List<Banner> ListaBanner { get; set; }
         public List<Produto> ListaProdutoDestaque { get; set; }
+        public List<Categoria> ListaCategoria { get; set; }
     }
 }
