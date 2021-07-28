@@ -146,6 +146,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Areas\Administracao\AdministracaoAreaRegistration.cs" />
+    <Compile Include="Areas\Administracao\Controllers\HomeController.cs" />
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -252,6 +254,9 @@
     <Content Include="Content\bootstrap-fileinput\scss\themes\explorer-fas\theme.scss" />
     <Content Include="Content\bootstrap-fileinput\scss\fileinput.scss" />
     <Content Include="Content\bootstrap-fileinput\scss\fileinput-rtl.scss" />
+    <Content Include="Areas\Administracao\Views\web.config" />
+    <Content Include="Areas\Administracao\Views\Shared\_LayoutCadastro.cshtml" />
+    <Content Include="Areas\Administracao\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -428,6 +433,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Administracao\Data\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
