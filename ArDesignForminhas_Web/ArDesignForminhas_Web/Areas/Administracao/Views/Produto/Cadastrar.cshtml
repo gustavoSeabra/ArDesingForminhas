@@ -1,10 +1,10 @@
 ﻿@model ArDesignForminhas_Web.Models.Produto
+
 @{
-    Layout = "~/Views/Shared/_LayoutCadastro.cshtml";
+    Layout = "~/Areas/Administracao/Views/Shared/_LayoutCadastro.cshtml";
 }
 
-
-@using (Html.BeginForm("Cadastrar", "Produto", FormMethod.Post, new { enctype = "multipart/form-data"}))
+@using (Html.BeginForm("Cadastrar", "Produto", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="row">
         <div class="col-md-9">
@@ -75,5 +75,4 @@
         });
     });
 </script>
-
 

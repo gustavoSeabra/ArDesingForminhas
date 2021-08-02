@@ -5,16 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Transactions;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
-namespace ArDesignForminhas_Web.Controllers
+namespace ArDesignForminhas_Web.Areas.Administracao.Controllers
 {
     public class ProdutoController : Controller
     {
         private ICategoriaRepositorio categoriaRepositorio;
         private IProdutoRepositorio repositorio;
-        private const string CaminhoFotoProduto = "~/Content/Imagens/Produto/";
+        private const string CaminhoFotoProduto = "/Content/Imagens/Produto/";
 
         public ProdutoController(IProdutoRepositorio _repositorio, ICategoriaRepositorio _repositorioCategoria)
         {
@@ -22,8 +23,11 @@ namespace ArDesignForminhas_Web.Controllers
             this.categoriaRepositorio = _repositorioCategoria;
         }
 
-        // GET: Produto
-        public ActionResult Index() => View();
+        // GET: Administracao/Produto
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         [HttpGet]
         public ActionResult Listar()
@@ -181,7 +185,7 @@ namespace ArDesignForminhas_Web.Controllers
                     objResposta.Mensagem = string.Empty;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 objResposta.Status = HttpStatusCode.BadRequest;
                 objResposta.Mensagem = ex.Message;
@@ -205,7 +209,7 @@ namespace ArDesignForminhas_Web.Controllers
         private void PreencheViewBagCaminhoImagem(Produto objProduto)
         {
             List<string> lista = new List<string>();
-            string dominio = $"{Request.Url.Scheme}://{Request.Url.Authority}";
+            string dominio = $"{Request.Url.Scheme}://{Request.Url.Authority}/";
 
             foreach (var obj in objProduto.Imagens)
             {

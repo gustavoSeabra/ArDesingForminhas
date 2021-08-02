@@ -1,15 +1,14 @@
-﻿
-@{
-    ViewBag.Title = "Cadastro de Baner da Home";
-    Layout = "~/Views/Shared/_LayoutCadastro.cshtml";
+﻿@{
+    Layout = "~/Areas/Administracao/Views/Shared/_LayoutCadastro.cshtml";
+    ViewBag.Title = "Cadastro de Categorias";
 }
 
 <div class="row">
     <div class="col-md-9">
-        <h2>Banner da Home</h2>
+        <h2>Categorias</h2>
     </div>
     <div class="col-md-3 d-flex justify-content-end">
-        @Html.ActionLink(" Cadastrar", "Cadastrar", "Banner", null, new { @class = "btn btn-outline-primary fas fa-plus-square" })
+        @Html.ActionLink(" Cadastrar", "Cadastrar", "Categoria", null, new { @class = "btn btn-outline-primary fas fa-plus-square" })
     </div>
 </div>
 <br />
@@ -23,8 +22,8 @@
 
 @section scripts{
     <script>
-        var urlIndex = "@Url.Action("Listar", "Banner")";
-        var urlDelete = "@Url.Action("Delete", "Banner")"
+        var urlIndex = "@Url.Action("Listar", "Categoria")";
+        var urlDelete = "@Url.Action("Delete", "Categoria")"
 
         function PreencheGrid() {
             $("#grid").load(urlIndex, function () {

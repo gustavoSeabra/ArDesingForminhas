@@ -1,8 +1,8 @@
 ﻿@model ArDesignForminhas_Web.Models.Banner
 
 @{
+    Layout = "~/Areas/Administracao/Views/Shared/_LayoutCadastro.cshtml";
     ViewBag.Title = "Editar";
-    Layout = "~/Views/Shared/_LayoutCadastro.cshtml";
 }
 
 @using (Html.BeginForm("Editar", "Banner", FormMethod.Post))
@@ -37,4 +37,3 @@
     </div>
 
 }
-

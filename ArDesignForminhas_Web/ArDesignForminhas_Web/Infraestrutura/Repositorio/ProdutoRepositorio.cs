@@ -154,6 +154,14 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
             return retorno;
         }
 
+        public List<Produto> ListarDestaque()
+        {
+            var lista = this.Listar();
+            var random = new Random();
+           
+            return lista.Skip(random.Next(lista.Count)).Take(3).ToList();
+        }
+
         public List<Produto> ListarPorCategoria(int codCategoria)
         {
             var parametros = new DynamicParameters();

@@ -11,6 +11,7 @@ namespace ArDesignForminhas_Web.Interfaces
     {
         Banner ObeterPorCodigo(int codBanner);
         List<Banner> Listar();
+        List<Banner> ListarHome();
         int Adicionar(Banner objBanner);
         int Editar(Banner objBanner);
         void Excluir(int codBanner);

@@ -9,6 +9,7 @@ namespace ArDesignForminhas_Web.Interfaces
         Produto ObeterPorCodigo(int codProduto);
         List<Produto> Listar();
         List<Produto> ListarPorCategoria(int codCategoria);
+        List<Produto> ListarDestaque();
         int Adicionar(Produto objProduto);
         void AdicionarImagemProduto(IEnumerable<ImagemProduto> lstImagemProduto);
         void ExcluirImagemProduto(int codProduto);
