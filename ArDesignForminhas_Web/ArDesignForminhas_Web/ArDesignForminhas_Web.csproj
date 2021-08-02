@@ -147,11 +147,11 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Administracao\AdministracaoAreaRegistration.cs" />
+    <Compile Include="Areas\Administracao\Controllers\BannerController.cs" />
+    <Compile Include="Areas\Administracao\Controllers\CategoriaController.cs" />
     <Compile Include="Areas\Administracao\Controllers\HomeController.cs" />
-    <Compile Include="Controllers\BannerController.cs" />
-    <Compile Include="Controllers\CategoriaController.cs" />
+    <Compile Include="Areas\Administracao\Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -257,6 +257,18 @@
     <Content Include="Areas\Administracao\Views\web.config" />
     <Content Include="Areas\Administracao\Views\Shared\_LayoutCadastro.cshtml" />
     <Content Include="Areas\Administracao\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Administracao\Views\Banner\_Listar.cshtml" />
+    <Content Include="Areas\Administracao\Views\Banner\Cadastrar.cshtml" />
+    <Content Include="Areas\Administracao\Views\Banner\Editar.cshtml" />
+    <Content Include="Areas\Administracao\Views\Banner\Index.cshtml" />
+    <Content Include="Areas\Administracao\Views\Categoria\_Listar.cshtml" />
+    <Content Include="Areas\Administracao\Views\Categoria\Cadastrar.cshtml" />
+    <Content Include="Areas\Administracao\Views\Categoria\Editar.cshtml" />
+    <Content Include="Areas\Administracao\Views\Categoria\Index.cshtml" />
+    <Content Include="Areas\Administracao\Views\Produto\_Listar.cshtml" />
+    <Content Include="Areas\Administracao\Views\Produto\Index.cshtml" />
+    <Content Include="Areas\Administracao\Views\Produto\Cadastrar.cshtml" />
+    <Content Include="Areas\Administracao\Views\Produto\Editar.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -414,20 +426,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Categoria\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutCadastro.cshtml" />
     <Content Include="Scripts\plugin\dataTables.Portuguese-Brasil.json" />
-    <Content Include="Views\Categoria\Cadastrar.cshtml" />
-    <Content Include="Views\Categoria\Editar.cshtml" />
-    <Content Include="Views\Produto\Index.cshtml" />
-    <Content Include="Views\Produto\Cadastrar.cshtml" />
-    <Content Include="Views\Categoria\_Listar.cshtml" />
-    <Content Include="Views\Produto\_Listar.cshtml" />
-    <Content Include="Views\Produto\Editar.cshtml" />
-    <Content Include="Views\Banner\Index.cshtml" />
-    <Content Include="Views\Banner\_Listar.cshtml" />
-    <Content Include="Views\Banner\Cadastrar.cshtml" />
-    <Content Include="Views\Banner\Editar.cshtml" />
     <Content Include="Views\Home\_Banner.cshtml" />
     <Content Include="Views\Home\_Destaque.cshtml" />
   </ItemGroup>

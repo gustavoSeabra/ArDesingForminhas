@@ -1,11 +1,14 @@
 ﻿using ArDesignForminhas_Web.Interfaces;
 using ArDesignForminhas_Web.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
-namespace ArDesignForminhas_Web.Controllers
+namespace ArDesignForminhas_Web.Areas.Administracao.Controllers
 {
     public class CategoriaController : Controller
     {
@@ -16,9 +19,11 @@ namespace ArDesignForminhas_Web.Controllers
             repositorio = _repositorio;
         }
 
-        // GET: Categoria
-        public ActionResult Index() => View();
-        
+        // GET: Administracao/Categoria
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         [HttpGet]
         public ActionResult Listar()
@@ -26,7 +31,7 @@ namespace ArDesignForminhas_Web.Controllers
             return PartialView("_Listar", repositorio.Listar(string.Empty));
         }
 
-       // GET: Categoria/Create
+        // GET: Categoria/Create
         public ActionResult Cadastrar()
         {
             return View();
@@ -42,7 +47,7 @@ namespace ArDesignForminhas_Web.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
@@ -65,11 +70,11 @@ namespace ArDesignForminhas_Web.Controllers
                 objCategoria.Codigo = id;
                 objCategoria.Nome = collection["Nome"];
                 objCategoria.Descricao = collection["Descricao"];
-                
+
                 this.repositorio.Editar(objCategoria);
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
@@ -91,7 +96,7 @@ namespace ArDesignForminhas_Web.Controllers
                 objResposta.Status = HttpStatusCode.OK;
                 objResposta.Mensagem = string.Empty;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 objResposta.Status = HttpStatusCode.BadRequest;
                 objResposta.Mensagem = ex.Message;

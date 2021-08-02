@@ -17,7 +17,7 @@ namespace ArDesignForminhas_Web
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { "ArDesignForminhas_Web.Areas.Controllers" }
+                namespaces: new[] { "ArDesignForminhas_Web.Controllers" }
             );
         }
     }

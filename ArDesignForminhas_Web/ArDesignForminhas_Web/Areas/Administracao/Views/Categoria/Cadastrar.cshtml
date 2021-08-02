@@ -1,14 +1,14 @@
 ﻿@model ArDesignForminhas_Web.Models.Categoria
+
 @{
-    Layout = "~/Views/Shared/_LayoutCadastro.cshtml";
+    Layout = "~/Areas/Administracao/Views/Shared/_LayoutCadastro.cshtml";
 }
 
-
-@using (Html.BeginForm("Editar", "Categoria", FormMethod.Post))
+@using (Html.BeginForm("Cadastrar", "Categoria", FormMethod.Post))
 {
     <div class="row">
         <div class="col-md-9">
-            <h2>Edição de Categorias</h2>
+            <h2>Cadastro de Categorias</h2>
         </div>
         <div class="col-md-3 d-flex justify-content-end">
             <button type="submit" class="btn btn-outline-primary">
@@ -21,12 +21,6 @@
     </div>
     <br />
     <br />
-    <div class="row">
-        <div class="form-group col-md-12">
-            <label class="font-weight-bold">Código: </label>
-            @Html.TextBoxFor(model => model.Codigo, new { @class = "form-control", @readonly = "readonly" })
-        </div>
-    </div>
     <div class="row">
         <div class="form-group col-md-12">
             <label class="font-weight-bold">Nome: </label>

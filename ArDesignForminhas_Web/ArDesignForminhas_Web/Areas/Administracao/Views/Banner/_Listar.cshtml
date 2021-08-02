@@ -1,23 +1,23 @@
-﻿@model IEnumerable<ArDesignForminhas_Web.Models.Produto>
+﻿@model IEnumerable<ArDesignForminhas_Web.Models.Banner>
 
 @if (Model.Count() <= 0)
 {
-    <span>Não há produtos cadastradas</span>
+    <span>Não há Banner cadastrados</span>
 }
 else
 {
 
-    <table id="gridProduto" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
+    <table id="gridBanner" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
         <thead>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Codigo)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Nome)
+                    @Html.DisplayNameFor(model => model.Caminho)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Valor)
+                    @Html.DisplayNameFor(model => model.EhHome)
                 </th>
                 <th>
                     &nbsp;
@@ -31,15 +31,16 @@ else
                     <td>
                         @Html.DisplayFor(modelitem => item.Codigo)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelitem => item.Nome)
+                    <td class="w-50">
+                        <img src=@Html.DisplayFor(modelitem => item.Caminho) alt="" style="width:40%" />
+
                     </td>
                     <td>
-                        @Html.DisplayFor(modelitem => item.Valor)
+                        @Html.DisplayFor(modelitem => item.EhHome)
                     </td>
                     <td class="d-flex justify-content-end">
                         <div class="button-group">
-                            @Html.ActionLink(" ", "Editar", "Produto", new { id = item.Codigo }, new { @class = "fas fa-edit" })
+                            @Html.ActionLink(" ", "Editar", "Banner", new { id = item.Codigo }, new { @class = "fas fa-edit" })
                             <button type="button" CommandArgument="@item.Codigo" class="btn btn-link">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
@@ -51,4 +52,4 @@ else
     </table>
 }
 
-    <script src="~/Scripts/Cadastro/Produto/Listar.js"></script>
+<script src="~/Scripts/Cadastro/Banner/Listar.js"></script>

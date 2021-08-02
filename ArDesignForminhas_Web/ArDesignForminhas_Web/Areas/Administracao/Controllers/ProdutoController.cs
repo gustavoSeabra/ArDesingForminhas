@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Transactions;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
-namespace ArDesignForminhas_Web.Controllers
+namespace ArDesignForminhas_Web.Areas.Administracao.Controllers
 {
     public class ProdutoController : Controller
     {
@@ -22,8 +23,11 @@ namespace ArDesignForminhas_Web.Controllers
             this.categoriaRepositorio = _repositorioCategoria;
         }
 
-        // GET: Produto
-        public ActionResult Index() => View();
+        // GET: Administracao/Produto
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         [HttpGet]
         public ActionResult Listar()
@@ -181,7 +185,7 @@ namespace ArDesignForminhas_Web.Controllers
                     objResposta.Mensagem = string.Empty;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 objResposta.Status = HttpStatusCode.BadRequest;
                 objResposta.Mensagem = ex.Message;

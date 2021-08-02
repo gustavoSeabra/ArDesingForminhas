@@ -1,9 +1,9 @@
 ﻿@model ArDesignForminhas_Web.Models.Banner
 
 @{
-    ViewBag.Title = "Cadastrar";
-    Layout = "~/Views/Shared/_LayoutCadastro.cshtml";
+    Layout = "~/Areas/Administracao/Views/Shared/_LayoutCadastro.cshtml";
 }
+
 
 @using (Html.BeginForm("Cadastrar", "Banner", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
