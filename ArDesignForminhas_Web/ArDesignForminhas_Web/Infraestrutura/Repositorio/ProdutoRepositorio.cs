@@ -167,7 +167,7 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
             var parametros = new DynamicParameters();
             var sql = SQL_LISTAR_PRODUTO;
 
-            sql += "where CodCategoria = @CodCategoria";
+            sql += " where CodCategoria = @CodCategoria";
             parametros.Add("CodCategoria", codCategoria, System.Data.DbType.Int32);
 
             return Contexto.Listar<Produto>(sql, parametros).ToList();

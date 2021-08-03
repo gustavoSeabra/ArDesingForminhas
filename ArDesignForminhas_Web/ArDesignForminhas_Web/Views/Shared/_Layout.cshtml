@@ -13,20 +13,24 @@
     @Scripts.Render("~/bundles/fontawesome")
     @Styles.Render("~/Content/css")
     @RenderSection("scripts", required: false)
-    <script>
+<script>
         $(document).ready(function () {
             var box = $('#ulMenu');
+            // var editUrl = '@Url.Action("detalhes", "Categoria")' + '/';
+            var editUrl = "/Categoria/detalhes/";
             $.ajax({
                 url: "/home/GetMenu",
                 dataType: "JSON",
                 success: function (res) {
                     $.each(res, function (i, v) {
-                        box.append('<li class="p-2"><a href="/categoria/detalhes/' + v.Id + '">' + v.Nome + '</a></li>');
+                        var fullUrl = editUrl + v.Id;
+                        box.append('<li class="p-2"><a href="' + fullUrl + '">' + v.Nome + '</a></li>');
+
                     })
                 }
             });
         });
-    </script>
+</script>
 </head>
 <body>
     

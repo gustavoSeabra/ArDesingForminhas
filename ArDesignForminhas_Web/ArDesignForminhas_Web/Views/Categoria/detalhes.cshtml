@@ -1,0 +1,10 @@
+﻿@model ArDesignForminhas_Web.ViewModels.CategoriaViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>@Html.DisplayFor(m => Model.objCategoria.Nome)</h1>
+
+<h2>Encontrou @Html.DisplayFor(m => Model.listaProdutos.Count) produtos desta categoria</h2>
