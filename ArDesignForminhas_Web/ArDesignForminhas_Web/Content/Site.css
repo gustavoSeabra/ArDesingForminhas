@@ -1,6 +1,7 @@
 ﻿body {
     /* padding-top: 50px; */
     padding-bottom: 20px;
+    font-family: Jost;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -17,8 +18,7 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-select
- {
+select {
     max-width: 280px;
 }
 
@@ -33,4 +33,27 @@ select
         color: #32373c;
         text-decoration: underline;
         /* font-weight: bolder; */
+    }
+
+.pt-6, .py-6 {
+    padding-top: 3rem !important;
+}
+
+.pb-12, .py-12 {
+    padding-bottom: 6rem !important;
+}
+
+.menu {
+    color: #111 !important;
+    text-decoration: none !important;
+    background-color: transparent !important;
+    font-size: 16pt !important;
+    font-weight: bold !important;
+}
+
+    .menu:hover {
+        color: #ff6f61 !important;
+        text-decoration: underline !important;
+        font-size: 16pt !important;
+        font-weight: bold !important;
     }

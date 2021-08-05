@@ -4,7 +4,66 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<section class="py-6 py-12">
+    <div class="container">
 
-<h1>@Html.DisplayFor(m => Model.objCategoria.Nome)</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="mb-10 text-center">Produtos feitos em @Html.DisplayFor(m => Model.objCategoria.Nome)</h2>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <h5>teste</h5>
+            </div>
+            <div class="col-md-9">
 
-<h2>Encontrou @Html.DisplayFor(m => Model.listaProdutos.Count) produtos desta categoria</h2>
+
+
+
+                <div class="row" align="center">
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-img-top">
+                                <img class="d-block w-100" src="#" width="286px" height="286px" />
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Teste</h5>
+                                <p class="card-text">Vamos que vamos</p>
+                                <a href="#" class="btn btn-primary">Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-img-top">
+                                <img class="d-block w-100" src="#" width="286px" height="286px" />
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Teste</h5>
+                                <p class="card-text">Vamos que vamos</p>
+                                <a href="#" class="btn btn-primary">Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-img-top">
+                                <img class="d-block w-100" src="#" width="286px" height="286px" />
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Teste</h5>
+                                <p class="card-text">Vamos que vamos</p>
+                                <a href="#" class="btn btn-primary">Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2>Encontrou @Html.DisplayFor(m => Model.listaProdutos.Count) produtos desta categoria</h2>
+    </div>
+</section>
+
+

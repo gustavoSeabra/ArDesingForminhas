@@ -1,6 +1,14 @@
 ﻿@model IEnumerable<ArDesignForminhas_Web.Models.Produto>
 @{ var i = 0; }
 
+<div class="container pt-6">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-10 text-center">Produtos em destaque</h2>
+        </div>
+    </div>
+</div>
+
 <div class="row mt-5" align="center">
 
     @foreach (var item in Model)
