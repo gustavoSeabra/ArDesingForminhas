@@ -10,13 +10,11 @@ namespace ArDesignForminhas_Web.Controllers
 {
     public class CategoriaController : Controller
     {
-        // private IBannerRepositorio repositorioBanner;
         private IProdutoRepositorio repositorioProduto;
         private ICategoriaRepositorio repositorioCategoria;
 
-        public CategoriaController(/*IBannerRepositorio _repositorio,*/ IProdutoRepositorio _repositorioProduto, ICategoriaRepositorio _repositorioCategoria)
+        public CategoriaController(IProdutoRepositorio _repositorioProduto, ICategoriaRepositorio _repositorioCategoria)
         {
-            // this.repositorioBanner = _repositorio;
             this.repositorioProduto = _repositorioProduto;
             this.repositorioCategoria = _repositorioCategoria;
         }

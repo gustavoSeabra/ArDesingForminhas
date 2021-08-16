@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using ArDesignForminhas_Web.Interfaces;
 using System.Web.Mvc;
 
 namespace ArDesignForminhas_Web.Controllers
 {
     public class ProdutoController : Controller
     {
+        private IProdutoRepositorio repositorioProduto;
+
+        public ProdutoController(IProdutoRepositorio _repositorioProduto)
+        {
+            this.repositorioProduto = _repositorioProduto;
+        }
+
+
         // GET: Produto
         public ActionResult Index()
         {
@@ -16,7 +21,7 @@ namespace ArDesignForminhas_Web.Controllers
 
         public ActionResult detalhes(int id)
         {
-            return View();
+            return View(this.repositorioProduto.ObeterPorCodigo(id));
         }
     }
 }

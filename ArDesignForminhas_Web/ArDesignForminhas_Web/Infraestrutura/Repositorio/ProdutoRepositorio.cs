@@ -164,7 +164,6 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
 
         public List<Produto> ListarPorCategoria(int codCategoria)
         {
-            var parametros = new DynamicParameters();
             var sql = SQL_LISTAR_PRODUTO;
             var retorno = new List<Produto>();
 
