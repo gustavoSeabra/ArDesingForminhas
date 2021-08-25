@@ -13,20 +13,24 @@
     @Scripts.Render("~/bundles/fontawesome")
     @Styles.Render("~/Content/css")
     @RenderSection("scripts", required: false)
-    <script>
+<script>
         $(document).ready(function () {
             var box = $('#ulMenu');
+            // var editUrl = '@Url.Action("detalhes", "Categoria")' + '/';
+            var editUrl = "/Categoria/detalhes/";
             $.ajax({
                 url: "/home/GetMenu",
                 dataType: "JSON",
                 success: function (res) {
                     $.each(res, function (i, v) {
-                        box.append('<li class="p-2"><a href="/categoria/detalhes/' + v.Id + '">' + v.Nome + '</a></li>');
+                        var fullUrl = editUrl + v.Id;
+                        box.append('<li class="nav-item p-2"><a class="menu" href="' + fullUrl + '">' + v.Nome + '</a></li>');
+
                     })
                 }
             });
         });
-    </script>
+</script>
 </head>
 <body>
     
@@ -53,10 +57,10 @@
     </nav>
     @RenderBody()
     <br />
-    <footer class="bg-dark bg-cover" style="background-image: url(./Content/Imagens/Footer.png)">
+    <footer class="bg-dark bg-cover" style="background-image: url(/Content/Imagens/Footer.png);">
         <div class="py-12 border-bottom border-gray-700">
             <div class="container">
-                <div class="row">
+                <div class="row" style="height:200px">
                     <div class="col-12 col-md-3">
                         &nbsp;
                     </div>
@@ -67,7 +71,7 @@
                 </div>
             </div>
         </div>
-        <div class="py-6">
+        <div  style="height:30px">
             <div class="container">
                 <div class="row">
                     <p class="mb-3 mb-md-0 font-size-xxs text-muted">&copy; @DateTime.Now.Year - Ar Desing Forminhas</p>

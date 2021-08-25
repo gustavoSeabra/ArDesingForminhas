@@ -164,13 +164,39 @@ namespace ArDesignForminhas_Web.Infraestrutura.Repositorio
 
         public List<Produto> ListarPorCategoria(int codCategoria)
         {
-            var parametros = new DynamicParameters();
             var sql = SQL_LISTAR_PRODUTO;
+            var retorno = new List<Produto>();
 
-            sql += "where CodCategoria = @CodCategoria";
-            parametros.Add("CodCategoria", codCategoria, System.Data.DbType.Int32);
+            sql += " where CodCategoria = " + codCategoria;
 
-            return Contexto.Listar<Produto>(sql, parametros).ToList();
+            Contexto.Conexao.Query<Produto, ImagemProduto, Produto>(sql,
+                (p, i) =>
+                {
+                    if (p.Imagens == null)
+                        p.Imagens = new List<ImagemProduto>();
+
+                    if (i != null)
+                    {
+                        if (p.Codigo == i.IdProduto)
+                            p.Imagens.Add(i);
+                    }
+
+
+                    var result = retorno.FirstOrDefault(x => x.Codigo == p.Codigo);
+
+                    if (result != null)
+                    {
+                        if (i != null)
+                            result.Imagens.Add(i);
+                    }
+                    else
+                    {
+                        retorno.Add(p);
+                    }
+                    return p;
+                }, splitOn: "Codigo, idProduto");
+
+            return retorno;
         }
 
         public Produto ObeterPorCodigo(int codProduto)
