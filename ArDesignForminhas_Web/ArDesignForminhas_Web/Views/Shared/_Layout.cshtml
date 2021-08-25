@@ -13,7 +13,7 @@
     @Scripts.Render("~/bundles/fontawesome")
     @Styles.Render("~/Content/css")
     @RenderSection("scripts", required: false)
-<script>
+    <script>
         $(document).ready(function () {
             var box = $('#ulMenu');
             // var editUrl = '@Url.Action("detalhes", "Categoria")' + '/';
@@ -30,10 +30,15 @@
                 }
             });
         });
-</script>
+
+        function resizeIframe(obj) {
+            obj.style.width = obj.contentWindow.document.body.scrollWidth + 'px';
+            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+        }
+    </script>
 </head>
 <body>
-    
+
     <nav class="navbar navbar-expand-xl navbar-light bg-light">
         <div class="container">
             <!-- Brand -->
@@ -58,20 +63,67 @@
     @RenderBody()
     <br />
     <footer class="bg-dark bg-cover" style="background-image: url(/Content/Imagens/Footer.png);">
-        <div class="py-12 border-bottom border-gray-700">
+        <div class="border-bottom border-gray-700 mb-3">
             <div class="container">
-                <div class="row" style="height:200px">
-                    <div class="col-12 col-md-3">
-                        &nbsp;
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        
+                        <!-- Heading -->
+                        <h4 class="tituloIconSocial text-white">
+                            <img src="~/Content/Imagens/Logo_SemFundo.png" width="70" height="40" />
+                            Ar Desing Forminhas
+                        </h4>
+
+                        <h6 style="color:white">Visite nossas redes sociais</h6>
+
+                        <!-- Social -->
+                        <ul class="list-unstyled list-inline mb-7 mb-md-0">
+                            <li class="list-inline-item">
+                                <a href="#!" class="iconSocial">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!" class="iconSocial">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!" class="iconSocial">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!" class="iconSocial">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <a href="#!" class="iconSocial">
+                                    <i class="fab fa-medium"></i>
+                                </a>
+                            </li>
+
+                        </ul>
                     </div>
-                    <div class="col-6 col-sm">&nbsp;<br /></div>
-                    <div class="col-6 col-sm">&nbsp;<br /></div>
-                    <div class="col-6 col-sm">&nbsp;<br /></div>
-                    <div class="col-6 col-sm">&nbsp;<br /></div>
+                    <div class="col-12 col-sm mt-4">
+                        <h6 style="color:white">
+                            <p>Nosso endereço:</p>
+                            <p>R. Princesa Elizabeth, 240</p>
+                            <p>Loja 4 - Parque Pedro II</p>
+                            <p>Belo Horizonte - MG, 30775-220</p>
+                        </h6>
+                    </div>
+                    <div class="col-12 col-sm mt-4">
+                        <div>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3751.8011957608824!2d-43.97173358525673!3d-19.890614886625805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa69129e209cc2b%3A0x3ee720d7d130f820!2sAR%20Design%20Forminhas!5e0!3m2!1spt-BR!2sbr!4v1629858532160!5m2!1spt-BR!2sbr" style="border:0;" scrolling="no" onload="resizeIframe(this)" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div  style="height:30px">
+        <div style="height:30px">
             <div class="container">
                 <div class="row">
                     <p class="mb-3 mb-md-0 font-size-xxs text-muted">&copy; @DateTime.Now.Year - Ar Desing Forminhas</p>
