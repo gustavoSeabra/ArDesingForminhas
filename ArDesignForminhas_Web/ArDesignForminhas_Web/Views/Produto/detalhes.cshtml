@@ -4,25 +4,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<main class="flex-fill mt-5">
+<main class="flex-fill mt-4">
     <div class="container">
         <div class="row g-3">
-            <div class="col-12 col-sm-6">
-                <img src="@Html.DisplayFor(model => model.Imagens.First().Caminho)" class="img-thumbnail" id="imgProduto">
+            <div class="col-12 col-sm-7">
+                <img src="@Html.DisplayFor(model => model.Imagens.First().Caminho)" class="img-thumbnail" style="width:780px; height:590px" id="imgProduto">
                 <br class="clearfix">
                 <div class="row my-3 gx-3">
                     @foreach (var imagem in Model.Imagens)
                     {
                         <div class="col-3">
-                            <img src="@Html.DisplayFor(model => imagem.Caminho)" class="img-thumbnail" onclick="trocarImagem(this)">
+                            <img src="@Html.DisplayFor(model => imagem.Caminho)" class="img-thumbnail" style="width:160px; height:120px" onclick="trocarImagem(this)">
                         </div>
                     }
                 </div>
             </div>
-            <div class="col-12 col-sm-6">
+            <div class="col-12 col-sm-5">
                 <h1>@Html.DisplayFor(model => model.Nome)</h1>
                 <p>
-                    @Html.DisplayFor(model => model.Descricao)
+                    <h4>
+                        @Html.DisplayFor(model => model.Descricao)
+                    </h4>
+                </p>
+                <p class="valorProduto">
+                    Valor: R$  @Html.DisplayFor(model => model.Valor)
                 </p>
             </div>
         </div>

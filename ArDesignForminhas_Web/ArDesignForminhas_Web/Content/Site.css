@@ -57,3 +57,11 @@ select {
         font-size: 16pt !important;
         font-weight: bold !important;
     }
+
+.valorProduto {
+    font-weight: bold !important;
+    /* text-decoration: underline !important; 
+    color: #13abe1 !important; */
+    font-size: 1.5rem;
+    font-family: Trebuchet MS,Arial,sans-serif
+}

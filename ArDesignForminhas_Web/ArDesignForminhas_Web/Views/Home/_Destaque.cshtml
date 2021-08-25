@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(prd => item.Nome)</h5>
                     <p class="card-text">@Html.DisplayFor(prd => item.Descricao)</p>
-                    <a href="#" class="btn btn-primary">Detalhes</a>
+                    @Html.ActionLink(" Detalhes", "detalhes", "Produto", new { id = item.Codigo }, new { @class = "btn btn-outline-primary" })
                 </div>
             </div>
         </div>

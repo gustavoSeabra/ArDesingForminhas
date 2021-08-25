@@ -24,7 +24,7 @@
                 success: function (res) {
                     $.each(res, function (i, v) {
                         var fullUrl = editUrl + v.Id;
-                        box.append('<li class="p-2"><a class="menu" href="' + fullUrl + '">' + v.Nome + '</a></li>');
+                        box.append('<li class="nav-item p-2"><a class="menu" href="' + fullUrl + '">' + v.Nome + '</a></li>');
 
                     })
                 }
