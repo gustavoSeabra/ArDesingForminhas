@@ -1,9 +1,11 @@
+using ArDesignForminhas_Web.Areas.Administracao.Controllers;
 using ArDesignForminhas_Web.Infraestrutura.Repositorio;
 using ArDesignForminhas_Web.Interfaces;
 using System;
 using System.Web.Mvc;
 using Unity;
 using Unity.AspNet.Mvc;
+using Unity.Injection;
 
 namespace ArDesignForminhas_Web
 {
@@ -54,6 +56,7 @@ namespace ArDesignForminhas_Web
             container.RegisterType<ICategoriaRepositorio, CategoriaRepositorio>();
             container.RegisterType<IProdutoRepositorio, ProdutoRepositorio>();
             container.RegisterType<IBannerRepositorio, BannerRepositorio>();
+            container.RegisterType<AccountController>(new InjectionConstructor());
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

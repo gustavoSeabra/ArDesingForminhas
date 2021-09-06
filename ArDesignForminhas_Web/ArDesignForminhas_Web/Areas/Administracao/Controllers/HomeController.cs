@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ArDesignForminhas_Web.Areas.Administracao.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         // GET: Administracao/Home
