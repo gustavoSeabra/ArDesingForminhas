@@ -11,6 +11,7 @@ using System.Web.Script.Serialization;
 
 namespace ArDesignForminhas_Web.Areas.Administracao.Controllers
 {
+    [Authorize]
     public class ProdutoController : Controller
     {
         private ICategoriaRepositorio categoriaRepositorio;

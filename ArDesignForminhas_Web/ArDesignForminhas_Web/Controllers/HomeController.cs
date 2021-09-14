@@ -35,13 +35,6 @@ namespace ArDesignForminhas_Web.Controllers
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
         private HomeViewModel PreencheViewModel()
         {
             var objViewModel = new HomeViewModel();
