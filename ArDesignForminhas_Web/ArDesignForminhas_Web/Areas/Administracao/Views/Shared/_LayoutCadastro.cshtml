@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -30,14 +31,18 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="p-2">@Html.ActionLink("Imagem Home", "Index", "Banner", null, new { @class = "link" })</li>
-                    <li class="p-2">@Html.ActionLink("Categoria", "Index", "Categoria", null, new { @class = "link" })</li>
-                    <li class="p-2">@Html.ActionLink("Produto", "Index", "Produto", null, new { @class = "link" })</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+
+            @if (Request.IsAuthenticated)
+            {
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="p-2">@Html.ActionLink("Imagem Home", "Index", "Banner", null, new { @class = "link" })</li>
+                        <li class="p-2">@Html.ActionLink("Categoria", "Index", "Categoria", null, new { @class = "link" })</li>
+                        <li class="p-2">@Html.ActionLink("Produto", "Index", "Produto", null, new { @class = "link" })</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            }
         </div>
     </nav>
     <div class="container body-content">
